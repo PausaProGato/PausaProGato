@@ -12,7 +12,7 @@ const Cabecalho: React.FC = () => {
   const location = useLocation();
 
   const links: NavLink[] = [
-    { to: "/", label: "Home" },
+    { to: "/home", label: "Home" },
     { to: "/faq", label: "FAQ" },
     { to: "/sobre", label: "Sobre" },
     { to: "/contato", label: "Contato" },

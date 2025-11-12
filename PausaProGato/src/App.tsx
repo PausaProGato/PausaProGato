@@ -5,17 +5,19 @@ import Faq from "./pages/Faq/Faq"
 import Sobre from "./pages/Sobre/Sobre"
 import Contato from "./pages/Contato/Contato"
 import Footer from "./componentes/Footer/Footer"
+import Login from "./pages/Login/Login"
 
 function App() {
 
   return (
     <>
-    <div className="min-h-screen flex flex-col bg-[#d9d9d9]">
+    <div className="min-h-screen flex flex-col bg-orange-100">
     <BrowserRouter>
     <Cabecalho />
     <main className="p-4">
       <Routes>
-        <Route path="/" element={<Home />}/>
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />}/>
         <Route path="/sobre" element={<Sobre />} /> 
         <Route path="/faq" element={<Faq />} />
         <Route path="/contato" element={<Contato />} />

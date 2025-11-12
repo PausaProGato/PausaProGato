@@ -27,9 +27,9 @@ function Contato() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-200 rounded-2xl">
+    <div className="min-h-screen flex flex-col items-center bg-orange-200 rounded-2xl">
       <br />
-      <h1 className="text-[2.25rem] font-bold mb-8 text-[#092d5c]">Integrantes</h1>
+      <h1 className="text-[2.25rem] font-bold mb-8 text-orange-700">Integrantes</h1>
 
       <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-1">
         {integrantes.map((pessoa, index) => (
