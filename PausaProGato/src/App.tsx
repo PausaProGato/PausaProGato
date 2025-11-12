@@ -5,7 +5,11 @@ import Home from "./pages/Home/Home";
 import FAQ from "./pages/Faq/Faq";
 import Contato from "./pages/Contato/Contato";
 import Sobre from "./pages/Sobre/Sobre";
+import Api from "./pages/paginaParaAPI/Api"
+import RecursosAjuda from "./pages/Recursos/Recursos-ajuda";
+import Humor from "./pages/Check-inHumor/Humor"
 import Footer from "./componentes/Footer/Footer";
+
 
 function App() {
   return (
@@ -29,9 +33,12 @@ function AppContent() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contato" element={<Contato/>} />
         <Route path="/sobre" element={<Sobre/>} />
+        <Route path="/checkin" element={<Humor />}/>
+        <Route path="/api" element={<Api />} />
+        <Route path="/recursos" element={<RecursosAjuda />} />
       </Routes>
 
-      {!hideLayout && <Footer />}
+      <Footer />
     </>
   );
 }

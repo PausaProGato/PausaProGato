@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <section className="min-h-screen bg-orange-100 flex flex-col items-center justify-center text-center p-6">
       <h1 className="text-4xl font-bold text-orange-700 mb-4">
-        Bem-vindo ao PausaProGato, {user.username || "visitante"}! 🐾
+        Bem-vindo/a ao PausaProGato, {user.username || "visitante"}! 🐾
       </h1>
       {user.avatar && (
         <img

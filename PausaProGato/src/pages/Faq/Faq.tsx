@@ -193,11 +193,11 @@ export default function FAQ() {
             onClick={handleVoltarHome}
             className="bg-orange-400 text-white px-8 py-3 rounded-lg hover:bg-orange-500 transition-colors font-semibold shadow-lg"
           >
-            ← Voltar para Home
+            Voltar para Home
           </button>
         </div>
 
-        <div className="text-center mt-8 text-gray-500 text-sm">
+        <div className="text-center mt-8 text-orange-400 text-sm">
           <p>Não encontrou o que procurava? Entre em contato conosco!</p>
         </div>
       </div>

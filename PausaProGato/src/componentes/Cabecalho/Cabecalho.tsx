@@ -16,10 +16,13 @@ const Cabecalho: React.FC = () => {
     { to: "/faq", label: "FAQ" },
     { to: "/sobre", label: "Sobre" },
     { to: "/contato", label: "Contato" },
+    { to: "/checkin", label:"Check-in de humor"},
+    { to: "/api", label: "API"},
+    { to: "/recursos", label: "Recursos/Ajuda"},
   ];
 
   const handleLogoClick = () => {
-    navigate("/");
+    navigate("/home");
     setMenuOpen(false);
   };
 
@@ -38,14 +41,14 @@ const Cabecalho: React.FC = () => {
         />
 
         {/* menu para telas maiores */}
-        <nav className="hidden lg:flex gap-8 p-4 text-amber-700 font-bold text-xl">
+        <nav className="hidden lg:flex gap-8 p-4 text-orange-700 font-bold text-xl">
           {links.map((link: NavLink) => (
             <Link
               key={link.to}
               to={link.to}
               className={`hover:bg-white rounded-xl px-4 py-2 hover:text-orange-400 transition-colors ${
                 isActiveLink(link.to) 
-                  ? "bg-orange-600 text-white hover:bg-orange-700 hover:text-white" 
+                  ? "bg-orange-500 text-white hover:bg-orange-600 hover:text-white" 
                   : ""
               }`}
             >
@@ -62,17 +65,17 @@ const Cabecalho: React.FC = () => {
             aria-label="Menu mobile"
           >
             <span
-              className={`block h-1 w-full bg-orange-500 transform transition duration-300 ${
+              className={`block h-1 w-full bg-orange-300 transform transition duration-300 ${
                 menuOpen ? "rotate-45 translate-y-2.5" : ""
               }`}
             ></span>
             <span
-              className={`block h-1 w-full bg-orange-500 transition-opacity duration-300 ${
+              className={`block h-1 w-full bg-orange-300 transition-opacity duration-300 ${
                 menuOpen ? "opacity-0" : "opacity-100"
               }`}
             ></span>
             <span
-              className={`block h-1 w-full bg-orange-500 transform transition duration-300 ${
+              className={`block h-1 w-full bg-orange-300 transform transition duration-300 ${
                 menuOpen ? "-rotate-45 -translate-y-2.5" : ""
               }`}
             ></span>
