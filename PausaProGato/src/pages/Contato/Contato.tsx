@@ -1,5 +1,5 @@
 function Contato() {
-  const integrantes = [
+  const contato = [
     {
       nome: "Agatha Yie Won Yun",
       rm: "RM:561507",
@@ -32,7 +32,7 @@ function Contato() {
       <h1 className="text-[2.25rem] font-bold mb-8 text-orange-700">Integrantes</h1>
 
       <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-1">
-        {integrantes.map((pessoa, index) => (
+        {contato.map((pessoa, index) => (
           <div
             key={index}
             className="bg-orange-50 rounded-2xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition-transform duration-300"

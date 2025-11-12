@@ -102,7 +102,7 @@ export default function FAQ() {
   ];
 
   const handleVoltarHome = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   const handleLimparCategoria = () => {

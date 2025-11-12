@@ -1,33 +1,39 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom" 
-import Cabecalho from "./componentes/Cabecalho/Cabecalho"
-import Home from "./pages/Home/Home"
-import Faq from "./pages/Faq/Faq"
-import Sobre from "./pages/Sobre/Sobre"
-import Contato from "./pages/Contato/Contato"
-import Footer from "./componentes/Footer/Footer"
-import Login from "./pages/Login/Login"
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import Cabecalho from "./componentes/Cabecalho/Cabecalho";
+import Login from "./pages/Login/Login";
+import Home from "./pages/Home/Home";
+import FAQ from "./pages/Faq/Faq";
+import Contato from "./pages/Contato/Contato";
+import Sobre from "./pages/Sobre/Sobre";
+import Footer from "./componentes/Footer/Footer";
 
 function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+  const hideLayout = ["/"].includes(location.pathname);
 
   return (
     <>
-    <div className="min-h-screen flex flex-col bg-orange-100">
-    <BrowserRouter>
-    <Cabecalho />
-    <main className="p-4">
+      {!hideLayout && <Cabecalho />}
+
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />}/>
-        <Route path="/sobre" element={<Sobre />} /> 
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/contato" element={<Contato />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/contato" element={<Contato/>} />
+        <Route path="/sobre" element={<Sobre/>} />
       </Routes>
-    </main>
-    </BrowserRouter>
-    <Footer />
-    </div>
+
+      {!hideLayout && <Footer />}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
