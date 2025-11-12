@@ -29,13 +29,17 @@ function Contato() {
   return (
     <div className="min-h-screen flex flex-col items-center bg-orange-200 rounded-2xl">
       <br />
-      <h1 className="text-[2.25rem] font-bold mb-8 text-orange-700">Integrantes</h1>
+      <h2 className="text-[2rem] font-bold mb-8 text-orange-600 text-center">
+        Tem alguma sugestão de melhoria ou gostaria de mandar uma mensagem?
+        <br />
+        Entre em contanto com as Integrantes
+      </h2>
 
-      <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-1">
+      <div className="grid gap-8 md:grid-cols-3 p-5 sm:grid-cols-1">
         {contato.map((pessoa, index) => (
           <div
             key={index}
-            className="bg-orange-50 rounded-2xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition-transform duration-300"
+            className="bg-orange-100 rounded-2xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition-transform duration-300"
           >
             <img
               src={pessoa.foto}
@@ -50,7 +54,7 @@ function Contato() {
                 href={pessoa.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-700 hover:text-black"
+                className="flex items-center gap-2 text-gray-600 hover:text-black"
               >
                 <img src="/img/github.png" alt="GitHub" className="w-8 h-8" />
                 Github
@@ -59,7 +63,7 @@ function Contato() {
                 href={pessoa.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-blue-700 hover:text-blue-900"
+                className="flex items-center gap-2 text-blue-600 hover:text-blue-900"
               >
                 <img src="/img/linkedin.png" alt="LinkedIn" className="w-8 h-8" />
                 Linkedin

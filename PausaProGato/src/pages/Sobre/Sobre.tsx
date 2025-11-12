@@ -1,6 +1,9 @@
-export default function Sobre() {
+import PageContainer from "../../componentes/Container/PageContainer";
+
+function Sobre() {
   return (
-    <section className="min-h-screen bg-orange-50 py-12 px-6 flex flex-col items-center">
+    <PageContainer>
+    <section className="min-h-screen bg-orange-200 py-12 px-6 flex flex-col items-center">
       <div className="max-w-3xl bg-white p-10 rounded-2xl shadow-xl space-y-8">
         <h1 className="text-4xl font-bold text-orange-700 text-center">
           Sobre o PausaProGato 🐱
@@ -10,7 +13,7 @@ export default function Sobre() {
           O <strong>PausaProGato</strong> nasceu com o propósito de trazer leveza,
           autocuidado e bem-estar para o dia a dia de quem vive a rotina intensa do trabalho.
           Acreditamos que pequenas pausas podem transformar o humor e a produtividade —
-          e nada melhor do que um toque de fofura que gatinhos podem nos trazer para isso! 🧡
+          e nada melhor do que um toque de fofura que gatinhos podem nos trazer para isso! 
         </p>
 
         <p className="text-orange-700 leading-relaxed text-lg">
@@ -29,5 +32,7 @@ export default function Sobre() {
         </div>
       </div>
     </section>
+    </PageContainer>
   );
 }
+export default Sobre;
