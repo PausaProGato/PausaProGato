@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTheme } from "../../context/theme-provider";
 
 type HumorOption = "feliz" | "neutro" | "cansado" | "triste" | "ansioso";
 
@@ -14,6 +15,7 @@ export default function HumorCheckin() {
   const [humorSelecionado, setHumorSelecionado] = useState<HumorOption | "">("");
   const [descricao, setDescricao] = useState("");
   const [mensagem, setMensagem] = useState("");
+  const { isDark } = useTheme();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,12 +41,29 @@ export default function HumorCheckin() {
   };
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center bg-orange-100 px-6 py-12">
-      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md text-center">
-        <h1 className="text-3xl font-bold text-orange-700 mb-4">
-          Check-in de Humor 
+    <section
+     className={`min-h-screen flex flex-col items-center justify-center px-6 py-12 ${
+      isDark
+      ? "bg-purple-900" 
+      : "bg-orange-200" }`}>
+      
+      <div className={`shadow-xl rounded-2xl p-8 w-full max-w-md text-center ${
+        isDark
+        ? "bg-purple-100"
+        : "bg-orange-50"
+      }`}>
+        <h1 className={`text-3xl font-bold mb-4 ${
+          isDark
+          ? "text-purple-950"
+          : "text-orange-700"
+        }`}>
+          Check-in do seu Humor 
         </h1>
-        <p className="text-orange-600 mb-6">
+        <p className={`mb-6 ${
+          isDark
+          ? "text-purple-900"
+          : "text-orange-600 "
+        }`}>
           Como você está se sentindo hoje?
         </p>
 
@@ -56,7 +75,8 @@ export default function HumorCheckin() {
                 type="button"
                 onClick={() => setHumorSelecionado(key as HumorOption)}
                 className={`text-4xl transition-transform hover:scale-125 ${
-                  humorSelecionado === key ? "scale-125 bg-orange-200 rounded-full p-2" : ""
+                  humorSelecionado === key 
+                  ? "scale-125 bg-orange-200 rounded-full p-2" : ""
                 }`}
               >
                 {emoji}

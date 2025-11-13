@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useTheme } from "../../context/ThemeContext"; 
-import { BotaoTema } from "../BotaoTema/BotaoTema";
+import { useTheme } from "../../context/theme-provider"; 
+import BotaoTema from "../BotaoTema/BotaoTema";
 
 interface NavLink {
   to: string;
@@ -12,16 +12,17 @@ const Cabecalho: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { theme } = useTheme(); 
+  const { isDark } = useTheme();
 
   const links: NavLink[] = [
     { to: "/home", label: "Home" },
     { to: "/faq", label: "FAQ" },
     { to: "/sobre", label: "Sobre" },
-    { to: "/contato", label: "Contato" },
+    { to: "/integrantes", label: "Integrantes" },
     { to: "/checkin", label: "Check-in de humor" },
     { to: "/api", label: "API" },
     { to: "/recursos", label: "Recursos/Ajuda" },
+    { to: "/contato", label: "Contato"},
   ];
 
   const handleLogoClick = () => {
@@ -34,59 +35,77 @@ const Cabecalho: React.FC = () => {
   return (
     <header
       className={`shadow-md transition-colors duration-300 ${
-        theme === "dark" ? "bg-paw-darkBg text-paw-darkText" : "bg-orange-400 text-orange-700"
+        isDark 
+          ? "bg-purple-950 text-purple-100 shadow-lg" 
+          : "bg-orange-400 text-orange-900 shadow-md"
       }`}
     >
       <div className="w-full mx-auto flex justify-between items-center p-3">
+        {/* Logo */}
         <div className="flex items-center gap-3">
           <img
             src="/logo.png"
             alt="Logo PausaProGato"
-            className="h- cursor-pointer"
+            className="h-10 cursor-pointer"
             onClick={handleLogoClick}
           />
         </div>
 
         {/* Menu para telas maiores */}
-        <nav className="hidden lg:flex gap-6 p-4 font-bold text-lg">
-          {links.map((link: NavLink) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`rounded-xl px-4 py-2 transition-colors ${
-                isActiveLink(link.to)
-                  ? "bg-orange-500 text-white dark:bg-paw-accent dark:text-white"
-                  : "hover:bg-white hover:text-orange-500 dark:hover:bg-paw-darkCard dark:hover:text-paw-darkText"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden lg:block">
-          <BotaoTema />
+        <div className="hidden lg:flex items-center gap-6">
+          <nav className="flex gap-2 p-4 font-bold text-lg">
+            {links.map((link: NavLink) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`rounded-xl px-4 py-2 transition-colors ${
+                  isActiveLink(link.to)
+                    ? isDark
+                      ? "bg-violet-800 text-purple-100" 
+                      : "bg-orange-500 text-white"
+                    : isDark
+                    ? "hover:bg-violet-900 hover:text-purple-200"
+                    : "hover:bg-white hover:text-orange-600"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          
+          <div className="flex items-center gap-2">
+            <BotaoTema />
+          </div>
         </div>
 
-        {/* Botão hambúrguer */}
-        <div className="lg:hidden">
+        <div className="lg:hidden flex items-center gap-4">
+          <div className="hidden sm:block">
+            <BotaoTema />
+          </div>
+          
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="flex flex-col justify-between h-6 w-7"
             aria-label="Menu mobile"
           >
             <span
-              className={`block h-1 w-full bg-current transform transition duration-300 ${
+              className={`block h-1 w-full ${
+                isDark ? "bg-purple-200" : "bg-orange-900"
+              } transform transition duration-300 ${
                 menuOpen ? "rotate-45 translate-y-2.5" : ""
               }`}
             ></span>
             <span
-              className={`block h-1 w-full bg-current transition-opacity duration-300 ${
+              className={`block h-1 w-full ${
+                isDark ? "bg-purple-200" : "bg-orange-900"
+              } transition-opacity duration-300 ${
                 menuOpen ? "opacity-0" : "opacity-100"
               }`}
             ></span>
             <span
-              className={`block h-1 w-full bg-current transform transition duration-300 ${
+              className={`block h-1 w-full ${
+                isDark ? "bg-purple-200" : "bg-orange-900"
+              } transform transition duration-300 ${
                 menuOpen ? "-rotate-45 -translate-y-2.5" : ""
               }`}
             ></span>
@@ -96,27 +115,38 @@ const Cabecalho: React.FC = () => {
 
       {/* Menu mobile */}
       {menuOpen && (
-        <nav
-          className={`lg:hidden w-full flex flex-col items-center gap-4 py-6 font-bold text-[1.3rem] ${
-            theme === "dark" ? "bg-paw-darkCard text-paw-darkText" : "bg-orange-100 text-orange-700"
+        <div
+          className={`lg:hidden w-full ${
+            isDark 
+              ? "bg-violet-900 text-purple-100" 
+              : "bg-orange-200 text-orange-800"
           }`}
         >
-          {links.map((link: NavLink) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              onClick={() => setMenuOpen(false)}
-              className={`rounded-xl px-4 py-2 transition-colors w-48 text-center ${
-                isActiveLink(link.to)
-                  ? "bg-orange-600 text-white dark:bg-paw-accent"
-                  : "hover:bg-white hover:text-orange-600 dark:hover:bg-paw-darkBg"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <BotaoTema />
-        </nav>
+          <nav className="flex flex-col items-center gap-4 py-6 font-bold text-[1.3rem]">
+            {links.map((link: NavLink) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setMenuOpen(false)}
+                className={`rounded-xl px-4 py-2 transition-colors w-48 text-center ${
+                  isActiveLink(link.to)
+                    ? isDark
+                      ? "bg-violet-800 text-purple-50"
+                      : "bg-orange-600 text-white"
+                    : isDark
+                    ? "hover:bg-purple-50 hover:text-violet-800"
+                    : "hover:bg-white hover:text-orange-600"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          
+          <div className="pb-6 flex justify-center sm:hidden">
+            <BotaoTema />
+          </div>
+        </div>
       )}
     </header>
   );

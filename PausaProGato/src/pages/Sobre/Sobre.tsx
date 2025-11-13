@@ -1,10 +1,7 @@
-import PageContainer from "../../componentes/Container/PageContainer";
-
 function Sobre() {
   return (
-    <PageContainer>
     <section className="min-h-screen bg-orange-200 py-12 px-6 flex flex-col items-center">
-      <div className="max-w-3xl bg-white p-10 rounded-2xl shadow-xl space-y-8">
+      <div className="max-w-3xl bg-orange-50 p-10 rounded-2xl shadow-xl space-y-8">
         <h1 className="text-4xl font-bold text-orange-700 text-center">
           Sobre o PausaProGato 🐱
         </h1>
@@ -32,7 +29,6 @@ function Sobre() {
         </div>
       </div>
     </section>
-    </PageContainer>
   );
 }
 export default Sobre;

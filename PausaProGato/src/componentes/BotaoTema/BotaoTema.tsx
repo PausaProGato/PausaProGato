@@ -1,16 +1,15 @@
-import React from "react";
-import { useTheme } from "../../context/ThemeContext";
+import { useTheme } from "../../context/theme-provider";
 
-export const BotaoTema: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
-
+export default function BotaoTema() {
+  const { toggleTheme, isDark } = useTheme();
+  
   return (
     <button
-      onClick={toggleTheme}
-      className="p-2 text-2xl rounded-full bg-paw-accent text-white dark:bg-paw-darkCard dark:text-paw-darkText shadow-md hover:scale-110 transition-transform duration-300"
-      aria-label="Alternar tema"
+      onClick={() => toggleTheme(isDark ? 'light' : 'dark')}
+      className="p-2 rounded-full bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-primary-100 dark:hover:bg-primary-900 shadow-lg border border-neutral-200 dark:border-neutral-700 transition-all duration-200"
+      title={isDark ? "Mudar para tema claro" : "Mudar para tema escuro"}
     >
-      {theme === "dark" ? "🐈‍⬛" : "🐈"}
+      {isDark ? '☀️' : '🌙'}
     </button>
   );
-};
+}
