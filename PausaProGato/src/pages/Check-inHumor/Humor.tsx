@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "../../context/theme-provider";
-type HumorOption = "feliz" | "neutro" | "cansado" | "triste" | "ansioso";
+type HumorOption = "feliz" | "neutro" | "cansado" | "triste" | "ansioso" | "apaixonado";
 
 const humorEmojis: Record<HumorOption, string> = {
   feliz: "😺",
@@ -8,6 +8,7 @@ const humorEmojis: Record<HumorOption, string> = {
   cansado: "😾",
   triste: "😿",
   ansioso: "🙀",
+  apaixonado: "😻"
 };
 
 const humorLabels: Record<HumorOption, string> = {
@@ -15,7 +16,8 @@ const humorLabels: Record<HumorOption, string> = {
   neutro: "Neutro",
   cansado: "Cansado",
   triste: "Triste", 
-  ansioso: "Ansioso"
+  ansioso: "Ansioso",
+  apaixonado: "apaixonado"
 };
 
 const humorCores: Record<HumorOption, { claro: string; escuro: string }> = {
@@ -24,6 +26,7 @@ const humorCores: Record<HumorOption, { claro: string; escuro: string }> = {
   cansado: { claro: "bg-blue-100 border-blue-400", escuro: "bg-blue-900 border-blue-500" },
   triste: { claro: "bg-purple-100 border-purple-400", escuro: "bg-purple-900 border-purple-500" },
   ansioso: { claro: "bg-red-100 border-red-400", escuro: "bg-red-900 border-red-500" },
+  apaixonado: {claro: "bg-red-100 border-red-400", escuro: "bg-red-900 border-red-500" }
 };
 
 export default function HumorCheckin() {
