@@ -14,7 +14,7 @@ const avatarImages: Record<AvatarKey, string> = {
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { isDark } = useTheme(); 
+  const { isDark } = useTheme();
 
   const [selectedAvatar, setSelectedAvatar] = useState<AvatarKey | ''>('');
   const [username, setUsername] = useState('');
@@ -29,33 +29,33 @@ export default function LoginPage() {
       return;
     }
 
-    localStorage.setItem("usuario", JSON.stringify({ username, avatar: selectedAvatar }));
+    sessionStorage.setItem("usuario", JSON.stringify({ username, avatar: selectedAvatar }));
 
     setShowSuccessModal(true);
   };
 
   const handleCloseModal = () => {
     setShowSuccessModal(false);
-    navigate("/home"); 
+    navigate("/home");
   };
 
   return (
     <section className={`relative min-h-screen flex items-center justify-center px-6 py-12 transition-colors duration-300 ${
-      isDark 
-        ? "bg-linear-to-br from-purple-900 to-violet-900" 
+      isDark
+        ? "bg-linear-to-br from-purple-900 to-violet-900"
         : "bg-linear-to-br from-orange-200 to-orange-300"
     }`}>
-      
+
       <div className="absolute top-6 right-6 z-10">
         <BotaoTema />
       </div>
 
       <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center">
-        
+
         <div className="space-y-6">
           <h1 className={`sm:text-[2.75rem] text-[3rem] font-extrabold leading-tight ${
-            isDark 
-              ? "text-white" 
+            isDark
+              ? "text-white"
               : "text-orange-800"
           }`}>
             Bem-vindo ao <span className={isDark ? "text-purple-400" : "text-orange-400"}>
@@ -63,8 +63,8 @@ export default function LoginPage() {
             </span>
           </h1>
           <p className={`text-[1.125rem] leading-relaxed ${
-            isDark 
-              ? "text-purple-200" 
+            isDark
+              ? "text-purple-200"
               : "text-orange-700"
           }`}>
             O <span className="font-semibold">PausaProGato</span> é um site criado para
@@ -73,8 +73,8 @@ export default function LoginPage() {
         </div>
 
         <div className={`p-8 md:p-10 rounded-2xl shadow-xl w-full max-w-md mx-auto transition-colors duration-300 ${
-          isDark 
-            ? "bg-linear-to-br from-purple-800 to-violet-800 border border-purple-600" 
+          isDark
+            ? "bg-linear-to-br from-purple-800 to-violet-800 border border-purple-600"
             : "bg-orange-50 border border-orange-200"
         }`}>
           <h2 className={`text-3xl font-bold text-center mb-8 ${
@@ -181,16 +181,16 @@ export default function LoginPage() {
       {showSuccessModal && selectedAvatar && (
         <div
           className={`fixed inset-0 flex items-center justify-center z-50 p-4 transition-colors duration-300 ${
-            isDark 
-              ? "bg-purple-900 bg-opacity-80" 
+            isDark
+              ? "bg-purple-900 bg-opacity-80"
               : "bg-orange-300 bg-opacity-60"
           }`}
           onClick={handleCloseModal}
         >
           <div
             className={`p-8 rounded-2xl shadow-xl w-full max-w-sm text-center transition-colors duration-300 ${
-              isDark 
-                ? "bg-linear-to-br from-purple-800 to-violet-800 border border-purple-600" 
+              isDark
+                ? "bg-linear-to-br from-purple-800 to-violet-800 border border-purple-600"
                 : "bg-white border border-orange-200"
             }`}
             onClick={(e) => e.stopPropagation()}
@@ -213,8 +213,8 @@ export default function LoginPage() {
               src={avatarImages[selectedAvatar]}
               alt={selectedAvatar}
               className={`w-32 h-32 rounded-full object-cover mx-auto mb-6 p-1 ${
-                isDark 
-                  ? "ring-4 ring-purple-400" 
+                isDark
+                  ? "ring-4 ring-purple-400"
                   : "ring-4 ring-orange-400"
               }`}
             />

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useTheme } from "../../context/theme-provider";
+import { useNavigate } from "react-router-dom";
+
 type HumorOption = "feliz" | "neutro" | "cansado" | "triste" | "ansioso" | "apaixonado";
 
 const humorEmojis: Record<HumorOption, string> = {
   feliz: "😺",
-  neutro: "😼", 
+  neutro: "😼",
   cansado: "😾",
   triste: "😿",
   ansioso: "🙀",
@@ -15,7 +17,7 @@ const humorLabels: Record<HumorOption, string> = {
   feliz: "Feliz",
   neutro: "Neutro",
   cansado: "Cansado",
-  triste: "Triste", 
+  triste: "Triste",
   ansioso: "Ansioso",
   apaixonado: "apaixonado"
 };
@@ -26,7 +28,7 @@ const humorCores: Record<HumorOption, { claro: string; escuro: string }> = {
   cansado: { claro: "bg-blue-100 border-blue-400", escuro: "bg-blue-900 border-blue-500" },
   triste: { claro: "bg-purple-100 border-purple-400", escuro: "bg-purple-900 border-purple-500" },
   ansioso: { claro: "bg-red-100 border-red-400", escuro: "bg-red-900 border-red-500" },
-  apaixonado: {claro: "bg-pink-100 border-pink-300", escuro: "bg-pink-500 border-pink-300" }
+  apaixonado: { claro: "bg-pink-100 border-pink-300", escuro: "bg-pink-500 border-pink-300" }
 };
 
 export default function HumorCheckin() {
@@ -34,6 +36,7 @@ export default function HumorCheckin() {
   const [descricao, setDescricao] = useState("");
   const [mensagem, setMensagem] = useState("");
   const { isDark } = useTheme();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +46,14 @@ export default function HumorCheckin() {
       return;
     }
 
+    // Pega o usuário da sessão para criar a chave única
+    const user = JSON.parse(sessionStorage.getItem("usuario") || "{}");
+    if (!user.username) {
+      setMensagem("Erro: Você precisa estar logado para registrar seu humor.");
+      return;
+    }
+    const userCheckinKey = `checkins_${user.username}`;
+
     const novoCheckin = {
       humor: humorSelecionado,
       descricao,
@@ -50,17 +61,19 @@ export default function HumorCheckin() {
       timestamp: new Date().getTime()
     };
 
-    const checkinsSalvos = JSON.parse(localStorage.getItem("checkins") || "[]");
-    const novosCheckins = [novoCheckin, ...checkinsSalvos].slice(0, 50); // Mantém apenas os 50 mais recentes
-
-    localStorage.setItem("checkins", JSON.stringify(novosCheckins));
+    // Salva na chave única do usuário
+    const checkinsSalvos = JSON.parse(localStorage.getItem(userCheckinKey) || "[]");
+    const novosCheckins = [novoCheckin, ...checkinsSalvos].slice(0, 50);
+    localStorage.setItem(userCheckinKey, JSON.stringify(novosCheckins));
 
     setMensagem(`Check-in ${humorLabels[humorSelecionado]} registrado com sucesso! 🐾`);
     setDescricao("");
     setHumorSelecionado("");
     
-    // Limpa a mensagem após 5 segundos
-    setTimeout(() => setMensagem(""), 5000);
+    // Redireciona para a Home após 2 segundos
+    setTimeout(() => {
+      navigate("/home"); 
+    }, 2000);
   };
 
   const getHumorColor = (humor: HumorOption) => {
@@ -69,14 +82,14 @@ export default function HumorCheckin() {
 
   return (
     <section className={`min-h-screen flex flex-col items-center justify-center px-6 py-12 transition-colors duration-300 ${
-      isDark 
-        ? "bg-purple-900" 
+      isDark
+        ? "bg-purple-900"
         : "bg-orange-200"
     }`}>
       
       <div className={`shadow-xl rounded-2xl p-8 w-full max-w-md transition-colors duration-300 ${
-        isDark 
-          ? "bg-purple-800  border border-purple-600" 
+        isDark
+          ? "bg-purple-800  border border-purple-600"
           : "bg-orange-50  border border-orange-200"
       }`}>
         
@@ -108,10 +121,10 @@ export default function HumorCheckin() {
                   type="button"
                   onClick={() => setHumorSelecionado(key as HumorOption)}
                   className={`flex flex-col items-center p-3 rounded-xl transition-all duration-300 border-2 ${
-                    humorSelecionado === key 
-                      ? `${getHumorColor(key as HumorOption)} scale-105 shadow-lg transform -translate-y-1` 
-                      : isDark 
-                        ? "bg-purple-700 border-purple-500 hover:bg-purple-600 hover:scale-105" 
+                    humorSelecionado === key
+                      ? `${getHumorColor(key as HumorOption)} scale-105 shadow-lg transform -translate-y-1`
+                      : isDark
+                        ? "bg-purple-700 border-purple-500 hover:bg-purple-600 hover:scale-105"
                         : "bg-orange-100 border-orange-300 hover:bg-orange-200 hover:scale-105"
                   }`}
                 >
@@ -172,13 +185,18 @@ export default function HumorCheckin() {
 
         {mensagem && (
           <div className={`mt-6 p-4 rounded-xl text-center transition-all duration-300 ${
-            mensagem.includes("sucesso") 
-              ? isDark 
-                ? "bg-green-900 text-green-100 border border-green-700" 
+            mensagem.includes("sucesso")
+              ? isDark
+                ? "bg-green-900 text-green-100 border border-green-700"
                 : "bg-green-100 text-green-800 border border-green-300"
-              : isDark
-                ? "bg-yellow-900 text-yellow-100 border border-yellow-700"
-                : "bg-yellow-100 text-yellow-800 border border-yellow-300"
+              : mensagem.includes("Erro")
+                ? isDark
+                  ? "bg-red-900 text-red-100 border border-red-700"
+                  // O TEXTO CORROMPIDO ESTAVA AQUI
+                  : "bg-red-100 text-red-800 border border-red-300" 
+                : isDark
+                  ? "bg-yellow-900 text-yellow-100 border border-yellow-700"
+                  : "bg-yellow-100 text-yellow-800 border border-yellow-300"
           }`}>
             <p className="font-medium">{mensagem}</p>
           </div>
