@@ -26,7 +26,7 @@ const humorCores: Record<HumorOption, { claro: string; escuro: string }> = {
   cansado: { claro: "bg-blue-100 border-blue-400", escuro: "bg-blue-900 border-blue-500" },
   triste: { claro: "bg-purple-100 border-purple-400", escuro: "bg-purple-900 border-purple-500" },
   ansioso: { claro: "bg-red-100 border-red-400", escuro: "bg-red-900 border-red-500" },
-  apaixonado: {claro: "bg-red-100 border-red-400", escuro: "bg-red-900 border-red-500" }
+  apaixonado: {claro: "bg-pink-100 border-pink-300", escuro: "bg-pink-500 border-pink-300" }
 };
 
 export default function HumorCheckin() {
