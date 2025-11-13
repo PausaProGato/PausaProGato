@@ -1,108 +1,218 @@
+import { useTheme } from "../../context/theme-provider";
+
 export default function RecursosAjuda() {
+  const { isDark } = useTheme();
+
   return (
-    <section className="min-h-screen bg-orange-100 py-12 px-6 flex flex-col items-center">
-      <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl p-8 space-y-10">
+    <section className={`min-h-screen py-12 px-6 flex flex-col items-center transition-colors duration-300 ${
+      isDark 
+        ? "bg-purple-900" 
+        : "bg-orange-200"
+    }`}>
+      
+      <div className={`max-w-4xl w-full rounded-2xl shadow-xl p-8 space-y-10 transition-colors duration-300 ${
+        isDark 
+          ? "bg-linear-to-br from-purple-800 to-violet-800 border border-purple-600" 
+          : "bg-linear-to-br from-white to-orange-50 border border-orange-200"
+      }`}>
+        
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-orange-700 mb-4">
-            Recursos & Ajuda 🧡
+          <h1 className={`text-3xl font-bold mb-4 ${
+            isDark ? "text-white" : "text-orange-700"
+          }`}>
+            Recursos & Ajuda{" "}
+            <span className={isDark ? "text-purple-300" : "text-orange-500"}>
+              🧡
+            </span>
           </h1>
-          <p className="text-orange-600 text-lg">
+          <p className={`text-lg ${
+            isDark ? "text-purple-200" : "text-orange-600"
+          }`}>
             Lembre-se: pedir ajuda é um ato de coragem.  
             Aqui estão alguns recursos que podem apoiar seu bem-estar emocional.
           </p>
         </div>
 
         {/* Dicas de bem-estar */}
-        <div className="bg-orange-100 p-6 rounded-xl">
-          <h2 className="flex items-center gap-2 text-2xl font-semibold text-orange-700 mb-4">
-            Dicas de Bem-Estar 🐾
+        <div className={`p-6 rounded-xl transition-colors duration-300 ${
+          isDark 
+            ? "bg-purple-700 border border-purple-500" 
+            : "bg-orange-100 border border-orange-200"
+        }`}>
+          <h2 className={`flex items-center gap-2 text-2xl font-semibold mb-4 ${
+            isDark ? "text-purple-100" : "text-orange-700"
+          }`}>
+            <span className={isDark ? "text-purple-300" : "text-orange-500"}>
+              🐾
+            </span>
+            Dicas de Bem-Estar
           </h2>
-          <ul className="space-y-3 text-orange-700">
-            <li>Faça pausas curtas durante o trabalho para respirar e alongar-se.</li>
-            <li>Tire alguns minutos do dia para observar algo que te faz sorrir.</li>
-            <li>Pratique respiração consciente por 1 minuto quando se sentir sobrecarregado.</li>
-            <li>Não se cobre demais — dias difíceis também fazem parte do processo.</li>
+          <ul className={`space-y-3 ${
+            isDark ? "text-purple-200" : "text-orange-700"
+          }`}>
+            <li className="flex items-start gap-2">
+              <span className={isDark ? "text-purple-300" : "text-orange-500"}>•</span>
+              Faça pausas curtas durante o trabalho para respirar e alongar-se.
+            </li>
+            <li className="flex items-start gap-2">
+              <span className={isDark ? "text-purple-300" : "text-orange-500"}>•</span>
+              Tire alguns minutos do dia para observar algo que te faz sorrir.
+            </li>
+            <li className="flex items-start gap-2">
+              <span className={isDark ? "text-purple-300" : "text-orange-500"}>•</span>
+              Pratique respiração consciente por 1 minuto quando se sentir sobrecarregado.
+            </li>
+            <li className="flex items-start gap-2">
+              <span className={isDark ? "text-purple-300" : "text-orange-500"}>•</span>
+              Não se cobre demais — dias difíceis também fazem parte do processo.
+            </li>
           </ul>
         </div>
 
         {/* Contatos de emergência */}
-        <div className="bg-orange-100 p-6 rounded-xl">
-          <h2 className="flex items-center gap-2 text-2xl font-semibold text-orange-700 mb-4">
-            Apoio Emocional & Emergências 
+        <div className={`p-6 rounded-xl transition-colors duration-300 ${
+          isDark 
+            ? "bg-purple-700 border border-purple-500" 
+            : "bg-orange-100 border border-orange-200"
+        }`}>
+          <h2 className={`flex items-center gap-2 text-2xl font-semibold mb-4 ${
+            isDark ? "text-purple-100" : "text-orange-700"
+          }`}>
+            Apoio Emocional & Emergências
           </h2>
-          <p className="text-orange-700 mb-4">
+          <p className={`mb-4 ${
+            isDark ? "text-purple-200" : "text-orange-700"
+          }`}>
             Se você estiver passando por um momento difícil, procure ajuda.  
-            Você não está sozinho 
+            Você não está sozinho.
           </p>
-          <ul className="space-y-3 text-orange-700">
+          <ul className={`space-y-4 ${
+            isDark ? "text-purple-200" : "text-orange-700"
+          }`}>
             <li>
-              <strong>CVV (Centro de Valorização da Vida)</strong> — 188  
-              <span className="block text-sm text-orange-600">Atendimento 24h, gratuito e confidencial</span>
+              <strong className={isDark ? "text-purple-100" : "text-orange-800"}>
+                CVV (Centro de Valorização da Vida)
+              </strong> — <span className="font-bold">188</span>  
+              <span className={`block text-sm mt-1 ${
+                isDark ? "text-purple-300" : "text-orange-600"
+              }`}>
+                Atendimento 24h, gratuito e confidencial
+              </span>
             </li>
             <li>
-              <strong>Chat Online:</strong>{" "}
+              <strong className={isDark ? "text-purple-100" : "text-orange-800"}>
+                Chat Online:
+              </strong>{" "}
               <a
                 href="https://cvv.org.br/chat/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-orange-600 underline hover:text-orange-500"
+                className={`underline hover:opacity-80 transition-opacity ${
+                  isDark ? "text-purple-300" : "text-orange-600"
+                }`}
               >
                 cvv.org.br/chat
               </a>
             </li>
             <li>
-              <strong>SAMU (emergência médica):</strong> 192
+              <strong className={isDark ? "text-purple-100" : "text-orange-800"}>
+                SAMU (emergência médica):
+              </strong> <span className="font-bold">192</span>
+            </li>
+            <li>
+              <strong className={isDark ? "text-purple-100" : "text-orange-800"}>
+                Polícia (emergência):
+              </strong> <span className="font-bold">190</span>
             </li>
           </ul>
         </div>
 
         {/* Recursos externos */}
-        <div className="bg-orange-100 p-6 rounded-xl">
-          <h2 className="flex items-center gap-2 text-2xl font-semibold text-orange-700 mb-4">
-             Materiais & Apoio Online 
+        <div className={`p-6 rounded-xl transition-colors duration-300 ${
+          isDark 
+            ? "bg-purple-700 border border-purple-500" 
+            : "bg-orange-100 border border-orange-200"
+        }`}>
+          <h2 className={`flex items-center gap-2 text-2xl font-semibold mb-4 ${
+            isDark ? "text-purple-100" : "text-orange-700"
+          }`}>
+            Materiais & Apoio Online
           </h2>
-          <ul className="space-y-3 text-orange-700">
+          <ul className={`space-y-3 ${
+            isDark ? "text-purple-200" : "text-orange-700"
+          }`}>
             <li>
-              {" "}
               <a
                 href="https://www.mindful.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-orange-600 underline hover:text-orange-500"
+                className={`underline hover:opacity-80 transition-opacity ${
+                  isDark ? "text-purple-300" : "text-orange-600"
+                }`}
               >
                 Mindful.org
               </a>{" "}
               — práticas de atenção plena e relaxamento.
             </li>
             <li>
-              {" "}
               <a
                 href="https://www.unicef.org/brazil/saude-mental"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-orange-600 underline hover:text-orange-500"
+                className={`underline hover:opacity-80 transition-opacity ${
+                  isDark ? "text-purple-300" : "text-orange-600"
+                }`}
               >
                 UNICEF - Saúde Mental
               </a>{" "}
               — dicas e conteúdos sobre autocuidado emocional.
             </li>
             <li>
-              {" "}
               <a
                 href="https://www.cvv.org.br/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-orange-600 underline hover:text-orange-500"
+                className={`underline hover:opacity-80 transition-opacity ${
+                  isDark ? "text-purple-300" : "text-orange-600"
+                }`}
               >
                 CVV - Centro de Valorização da Vida
-              </a>
+              </a>{" "}
+              — site oficial com diversos recursos.
+            </li>
+            <li>
+              <a
+                href="https://www.vitat.com.br/bem-estar/saude-mental"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`underline hover:opacity-80 transition-opacity ${
+                  isDark ? "text-purple-300" : "text-orange-600"
+                }`}
+              >
+                Vitat - Saúde Mental
+              </a>{" "}
+              — artigos e orientações sobre bem-estar.
             </li>
           </ul>
         </div>
+        
+          <p className="mb-2 text-center">
+            <span className={isDark ? "text-purple-300" : "text-orange-500"}>
+              🐈
+            </span>{" "}
+            Lembre-se: até os gatos tiram uma pausa para se cuidar.
+          </p>
+          <p className="text-center">Você merece descanso, carinho e leveza.</p>
 
-        <div className="text-center text-orange-700 text-lg font-medium mt-8">
-          <p>🐈 Lembre-se: até os gatos tiram uma pausa para se cuidar.</p>
-          <p>Você merece descanso, carinho e leveza.</p>
+        <div className={`p-4 rounded-lg border-l-4 text-sm ${
+          isDark 
+            ? "bg-purple-900 border-purple-400 text-purple-200" 
+            : "bg-orange-50 border-orange-400 text-orange-700"
+        }`}>
+          <p>
+            <strong>Importante:</strong> Estes recursos são para apoio emocional. 
+            Em casos de emergência ou crise, sempre procure ajuda profissional qualificada.
+          </p>
         </div>
       </div>
     </section>

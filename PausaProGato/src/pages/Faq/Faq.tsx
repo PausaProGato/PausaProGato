@@ -1,206 +1,120 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useTheme } from '../../context/theme-provider';
 
-interface FAQItemProps {
-  title: string;
+interface FAQItem {
   question: string;
   answer: string;
-  question2: string;
-  answer2: string;
-}
-
-const FAQItem: React.FC<FAQItemProps> = ({ title, question, answer, question2, answer2 }) => {
-  const [open, setOpen] = useState<boolean>(true);
-
-  return (
-    <div className="mb-4 bg-orange-100 rounded-2xl shadow-lg overflow-hidden">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex justify-between items-center bg-orange-400 p-4 hover:bg-orange-500 focus:outline-none transition-colors"
-      >
-        <span className="font-bold text-[1.125rem] text-left text-white">{title}</span>
-        <span
-          className={`ml-2 transform transition-transform duration-300 text-white ${
-            open ? "rotate-180" : ""
-          }`}
-        >
-          ▼
-        </span>
-      </button>
-
-      {open && (
-        <div className="p-4 space-y-4 text-orange-700">
-          <div className="border-b border-orange-200 pb-3">
-            <h3 className="font-semibold text-orange-800 mb-2 text-lg">{question}</h3>
-            <p className="text-orange-600 leading-relaxed">{answer}</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-orange-800 mb-2 text-lg">{question2}</h3>
-            <p className="text-orange-600 leading-relaxed">{answer2}</p>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-interface FAQData {
-  title: string;
-  question: string;
-  answer: string;
-  question2: string;
-  answer2: string;
 }
 
 export default function FAQ() {
-  const navigate = useNavigate();
-  const [categoriaAtiva, setCategoriaAtiva] = useState<string>("");
+  const { isDark } = useTheme();
+  const [openItems, setOpenItems] = useState<number[]>([]);
 
-  const faqs: FAQData[] = [
+  const toggleItem = (index: number) => {
+    setOpenItems(prev => 
+      prev.includes(index) 
+        ? prev.filter(i => i !== index)
+        : [...prev, index]
+    );
+  };
+
+  const faqItems: FAQItem[] = [
     {
-      title: "categoria1",
-      question: "1.?",
-      answer: "resposta1",
-      question2: "2.?",
-      answer2: "resposta2",
+      question: "O que é o PausaProGato?",
+      answer: "O PausaProGato é uma plataforma inovadora focada no bem-estar de profissionais, oferecendo ferramentas para monitoramento de humor, pausas conscientes e recursos para melhorar a qualidade de vida no ambiente de trabalho."
     },
     {
-      title: "categoria2",
-      question: "1.?",
-      answer: "resposta1",
-      question2: "2.?",
-      answer2: "resposta2",
+      question: "Como funciona o check-in de humor?",
+      answer: "No check-in de humor, você pode registrar como está se sentindo diariamente. O sistema oferece uma escala de emoções e espaço para comentários, ajudando você a acompanhar seu estado emocional ao longo do tempo."
     },
     {
-      title: "categoria3",
-      question: "1.?",
-      answer: "resposta1",
-      question2: "2.?",
-      answer2: "resposta2",
+      question: "Meus dados são seguros?",
+      answer: "Sim! Levamos a privacidade muito a sério. Seus dados de humor e informações pessoais são armazenados localmente no seu navegador e não são compartilhados com terceiros sem sua autorização."
     },
     {
-      title: "categoria4",
-      question: "1.?",
-      answer: "resposta1",
-      question2: "2.?",
-      answer2: "resposta2",
+      question: "Posso usar o site no celular?",
+      answer: "Com certeza! O PausaProGato é totalmente responsivo e funciona perfeitamente em smartphones, tablets e computadores."
     },
     {
-      title: "categoria5",
-      question: "1.?",
-      answer: "resposta1",
-      question2: "2.?",
-      answer2: "resposta2",
+      question: "O site é gratuito?",
+      answer: "Sim! O PausaProGato é completamente gratuito. Acreditamos que o bem-estar no trabalho deve ser acessível para todos."
     },
     {
-      title: "categoria6",
-      question: "1.?",
-      answer: "resposta1",
-      question2: "2.?",
-      answer2: "resposta2",
+      question: "O que significa 'pausa consciente'?",
+      answer: "São pausas intencionais durante o trabalho onde você pratica mindfulness, respiração ou simplesmente se desconecta por alguns minutos. Essas pausas ajudam a prevenir burnout e melhoram a produtividade."
     },
+    {
+      question: "Como o PausaProGato ajuda na saúde mental?",
+      answer: "Através do acompanhamento constante do humor e recursos educativos, ajudamos você a desenvolver maior autoconsciência emocional e hábitos mais saudáveis no trabalho."
+    },
+    {
+      question: "Como sugiro novas funcionalidades?",
+      answer: "Adoramos feedback! Você pode enviar sugestões através da nossa página de contato"
+    }
   ];
 
-  const handleVoltarHome = () => {
-    navigate("/home");
-  };
-
-  const handleLimparCategoria = () => {
-    setCategoriaAtiva("");
-  };
-
-  const faqAtiva = faqs.find(faq => faq.title === categoriaAtiva);
-
   return (
-    <div className="min-h-screen bg-orange-200 py-8 px-4">
+    <div className={`min-h-screen py-12 px-6 transition-colors duration-300 ${
+      isDark 
+        ? "bg-linear-to-br from-purple-900 to-violet-900" 
+        : "bg-linear-to-br from-orange-50 to-orange-100"
+    }`}>
       <div className="max-w-4xl mx-auto">
         
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-orange-500 mb-4">
+        <div className="text-center mb-12">
+          <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${
+            isDark ? "text-white" : "text-orange-800"
+          }`}>
             Perguntas Frequentes
           </h1>
-          <p className="text-orange-600 text-lg mb-4">
+          <p className={`text-lg ${
+            isDark ? "text-purple-200" : "text-orange-600"
+          }`}>
             Encontre respostas para as dúvidas mais comuns sobre o PausaProGato
           </p>
-
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
-          {faqs.map((faq, index) => (
-            <button
+        <div className="space-y-4">
+          {faqItems.map((item, index) => (
+            <div
               key={index}
-              onClick={() => setCategoriaAtiva(faq.title)}
-              className={`px-6 py-3 rounded-full font-semibold transition-all ${
-                categoriaAtiva === faq.title
-                  ? "bg-orange-400 text-white shadow-lg"
-                  : "bg-white text-orange-400 border border-orange-400 hover:bg-orange-600 hover:text-white"
+              className={`rounded-2xl transition-all duration-300 border-2 ${
+                isDark
+                  ? "bg-purple-800 border-purple-600 hover:border-purple-500"
+                  : "bg-white border-orange-200 hover:border-orange-300"
               }`}
             >
-              {faq.title}
-            </button>
+              <button
+                onClick={() => toggleItem(index)}
+                className={`w-full px-6 py-4 text-left flex justify-between items-center transition-colors ${
+                  isDark ? "text-white" : "text-orange-900"
+                }`}
+              >
+                <span className="font-semibold text-lg pr-4">{item.question}</span>
+                <span className={`text-2xl transition-transform duration-300 ${
+                  openItems.includes(index) ? 'rotate-180' : ''
+                }`}>
+                  {isDark 
+                  ? '🔮' 
+                  : '🐾'}
+                </span>
+              </button>
+              
+              {openItems.includes(index) && (
+                <div className={`px-6 pb-4 border-t ${
+                  isDark ? "border-purple-600" : "border-orange-200"
+                }`}>
+                  <p className={`pt-3 ${
+                    isDark ? "text-purple-200" : "text-orange-700"
+                  }`}>
+                    {item.answer}
+                  </p>
+                </div>
+              )}
+            </div>
           ))}
         </div>
-
-        {categoriaAtiva && (
-          <div className="bg-white rounded-3xl shadow-xl p-6 mb-8">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-orange-500">
-                {categoriaAtiva}
-              </h2>
-              <button
-                onClick={handleLimparCategoria}
-                className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors text-sm"
-              >
-                Ver Todas as Categorias
-              </button>
-            </div>
-            
-            {faqAtiva && (
-              <FAQItem
-                title={faqAtiva.title}
-                question={faqAtiva.question}
-                answer={faqAtiva.answer}
-                question2={faqAtiva.question2}
-                answer2={faqAtiva.answer2}
-              />
-            )}
-          </div>
-        )}
-
-        {!categoriaAtiva && (
-          <div className="bg-white rounded-3xl shadow-xl p-6">
-            <h2 className="text-2xl font-bold text-center text-orange-400 mb-6">
-              Todas as Perguntas
-            </h2>
-            
-            <div className="space-y-4">
-              {faqs.map((faq, index) => (
-                <FAQItem
-                  key={index}
-                  title={faq.title}
-                  question={faq.question}
-                  answer={faq.answer}
-                  question2={faq.question2}
-                  answer2={faq.answer2}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div className="text-center mt-8">
-          <button
-            onClick={handleVoltarHome}
-            className="bg-orange-400 text-white px-8 py-3 rounded-lg hover:bg-orange-500 transition-colors font-semibold shadow-lg"
-          >
-            Voltar para Home
-          </button>
-        </div>
-
-        <div className="text-center mt-8 text-orange-400 text-sm">
-          <p>Não encontrou o que procurava? Entre em contato conosco!</p>
         </div>
       </div>
-    </div>
   );
 }

@@ -1,5 +1,9 @@
+import { useTheme } from "../../context/theme-provider";
+
 function Integrantes() {
-  const integrantes= [
+  const { isDark } = useTheme();
+
+  const integrantes = [
     {
       nome: "Agatha Yie Won Yun",
       rm: "RM:561507",
@@ -27,44 +31,113 @@ function Integrantes() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-orange-200 rounded-2xl">
-      <br />
-      <h2 className="text-[2.25rem] font-bold mb-8 text-orange-600 text-center">
-        Integrantes
-      </h2>
+    <div className={`min-h-screen flex flex-col items-center py-12 px-6 transition-colors duration-300 ${
+      isDark 
+        ? "bg-violet-900" 
+        : "bg-orange-300"
+    }`}>
+      
+      {/* Cabeçalho */}
+      <div className="text-center mb-12">
+        <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${
+          isDark ? "text-white" : "text-orange-700"
+        }`}>
+          Nossa Equipe
+        </h2>
+        <p className={`text-lg ${
+          isDark ? "text-purple-200" : "text-orange-600"
+        }`}>
+          Conheça as desenvolvedoras por trás do PausaProGato
+        </p>
+      </div>
 
-      <div className="grid gap-8 md:grid-cols-3 p-5 sm:grid-cols-1">
+      <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-1 max-w-6xl w-full">
         {integrantes.map((pessoa, index) => (
           <div
             key={index}
-            className="bg-orange-100 rounded-2xl shadow-lg p-6 flex flex-col items-center hover:scale-105 transition-transform duration-300"
+            className={`rounded-2xl shadow-xl p-8 flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
+              isDark 
+                ? "bg-purple-800 border border-purple-600 hover:border-purple-400" 
+                : "bg-orange-50 border border-orange-200 hover:border-orange-300"
+            }`}
           >
             <img
               src={pessoa.foto}
               alt={pessoa.nome}
-              className="w-45 h-45 rounded-full object-cover shadow-md mb-4"
+              className={`w-32 h-32 rounded-full object-cover shadow-lg mb-6 ${
+                isDark 
+                  ? "ring-4 ring-purple-400" 
+                  : "ring-4 ring-orange-400"
+              }`}
             />
-            <h3 className="text-[1.25rem] font-semibold text-orange-700">{pessoa.nome}</h3>
-            <p className="text-orange-600">{pessoa.rm}</p>
-            <p className="text-orange-600 mb-4">Turma: {pessoa.turma}</p>
-            <div className="flex gap-4">
+            
+            <h3 className={`text-xl font-semibold text-center mb-2 ${
+              isDark ? "text-white" : "text-orange-800"
+            }`}>
+              {pessoa.nome}
+            </h3>
+            
+            <p className={`font-medium mb-1 ${
+              isDark ? "text-purple-200" : "text-orange-700"
+            }`}>
+              {pessoa.rm}
+            </p>
+            
+            <p className={`mb-6 ${
+              isDark ? "text-purple-300" : "text-orange-600"
+            }`}>
+              Turma: {pessoa.turma}
+            </p>
+
+            <div className="flex gap-6 mt-4">
               <a
                 href={pessoa.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-600 hover:text-black"
+                className={`flex flex-col items-center gap-2 transition-all duration-300 hover:scale-110 ${
+                  isDark 
+                    ? "text-purple-200 hover:text-white" 
+                    : "text-orange-600 hover:text-orange-800"
+                }`}
+                title="GitHub"
               >
-                <img src="/img/github.png" alt="GitHub" className="w-8 h-8" />
-                Github
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                  isDark 
+                    ? "bg-purple-700 hover:bg-purple-600" 
+                    : "bg-orange-100 hover:bg-orange-200"
+                }`}>
+                  <img 
+                    src="/img/github.png" 
+                    alt="GitHub" 
+                    className="w-6 h-6" 
+                  />
+                </div>
+                <span className="text-sm font-medium">GitHub</span>
               </a>
+
               <a
                 href={pessoa.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-blue-600 hover:text-blue-900"
+                className={`flex flex-col items-center gap-2 transition-all duration-300 hover:scale-110 ${
+                  isDark 
+                    ? "text-purple-200 hover:text-white" 
+                    : "text-blue-600 hover:text-blue-800"
+                }`}
+                title="LinkedIn"
               >
-                <img src="/img/linkedin.png" alt="LinkedIn" className="w-8 h-8" />
-                Linkedin
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                  isDark 
+                    ? "bg-purple-700 hover:bg-purple-600" 
+                    : "bg-blue-100 hover:bg-blue-200"
+                }`}>
+                  <img 
+                    src="/img/linkedin.png" 
+                    alt="LinkedIn" 
+                    className="w-6 h-6" 
+                  />
+                </div>
+                <span className="text-sm font-medium">LinkedIn</span>
               </a>
             </div>
           </div>
