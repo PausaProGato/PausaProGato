@@ -37,7 +37,6 @@ function Integrantes() {
         : "bg-orange-300"
     }`}>
       
-      {/* Cabeçalho */}
       <div className="text-center mb-12">
         <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${
           isDark ? "text-white" : "text-orange-700"

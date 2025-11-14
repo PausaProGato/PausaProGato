@@ -46,7 +46,6 @@ export default function HumorCheckin() {
       return;
     }
 
-    // Pega o usuário da sessão para criar a chave única
     const user = JSON.parse(sessionStorage.getItem("usuario") || "{}");
     if (!user.username) {
       setMensagem("Erro: Você precisa estar logado para registrar seu humor.");
@@ -61,7 +60,6 @@ export default function HumorCheckin() {
       timestamp: new Date().getTime()
     };
 
-    // Salva na chave única do usuário
     const checkinsSalvos = JSON.parse(localStorage.getItem(userCheckinKey) || "[]");
     const novosCheckins = [novoCheckin, ...checkinsSalvos].slice(0, 50);
     localStorage.setItem(userCheckinKey, JSON.stringify(novosCheckins));
@@ -70,7 +68,6 @@ export default function HumorCheckin() {
     setDescricao("");
     setHumorSelecionado("");
     
-    // Redireciona para a Home após 2 segundos
     setTimeout(() => {
       navigate("/home"); 
     }, 2000);
@@ -192,7 +189,6 @@ export default function HumorCheckin() {
               : mensagem.includes("Erro")
                 ? isDark
                   ? "bg-red-900 text-red-100 border border-red-700"
-                  // O TEXTO CORROMPIDO ESTAVA AQUI
                   : "bg-red-100 text-red-800 border border-red-300" 
                 : isDark
                   ? "bg-yellow-900 text-yellow-100 border border-yellow-700"

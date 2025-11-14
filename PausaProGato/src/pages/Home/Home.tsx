@@ -1,8 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom'; // <-- 1. Importar useNavigate
+import { Link, useNavigate } from 'react-router-dom'; 
 import { useTheme } from '../../context/theme-provider';
 import { useState, useEffect } from 'react';
 
-// --- Tipos e Constantes ---
 type HumorOption = "feliz" | "neutro" | "cansado" | "triste" | "ansioso" | "apaixonado";
 
 interface CheckinEntry {
@@ -29,14 +28,13 @@ const humorCores: Record<HumorOption, { claro: string; escuro: string }> = {
   ansioso: { claro: "bg-red-100 border-red-400 text-red-900", escuro: "bg-red-900 border-red-700 text-red-100" },
   apaixonado: { claro: "bg-pink-100 border-pink-300 text-pink-900", escuro: "bg-pink-900 border-pink-700 text-pink-100" }
 };
-// --- Fim dos Tipos ---
 
 
 export default function Home() {
   const user = JSON.parse(sessionStorage.getItem("usuario") || "{}");
   const { isDark } = useTheme();
   const [checkins, setCheckins] = useState<CheckinEntry[]>([]);
-  const navigate = useNavigate(); // <-- 2. Iniciar o hook
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     if (user.username) {
@@ -48,15 +46,11 @@ export default function Home() {
     }
   }, [user.username]);
 
-  // --- 3. Função de Logout ---
   const handleLogout = () => {
-    // 1. Remove o usuário da sessão
     sessionStorage.removeItem("usuario");
 
-    // 2. Redireciona para a página de login (raiz do site)
     navigate("/");
   };
-  // -------------------------
 
   const getHumorStyle = (humor: HumorOption) => {
     const styles = humorCores[humor];
@@ -64,7 +58,6 @@ export default function Home() {
   };
 
   const navigationCards = [
-    // ... (Seus cards de navegação)
     {
       title: "Recursos",
       description: "Veja nossa página de recursos e ajuda",
@@ -92,7 +85,7 @@ export default function Home() {
       className={`flex flex-col items-center justify-center min-h-[80vh] p-8 text-center transition-colors duration-300 ${
         isDark
           ? "bg-purple-900 text-white"
-          : "bg-linear-to-br from-orange-100 to-orange-200 text-orange-900"
+          : "bg-orange-200 text-orange-900"
       }`}
     >
       <div className="max-w-4xl mx-auto">
@@ -120,8 +113,6 @@ export default function Home() {
           </div>
         )}
 
-        {/* --- 4. BOTÃO DE SAIR ADICIONADO AQUI --- */}
-        {/* Ele só aparece se o usuário estiver logado (tiver um user.username) */}
         {user.username && (
           <button
             onClick={handleLogout}
@@ -134,9 +125,8 @@ export default function Home() {
             Sair da Conta
           </button>
         )}
-        {/* --- FIM DO BOTÃO --- */}
 
-        <p className={`mt-8 max-w-2xl mx-auto text-lg ${ // Aumentei a margem top para mt-8
+        <p className={`mt-8 max-w-2xl mx-auto text-lg ${ 
           isDark
             ? "text-purple-200"
             : "text-orange-700"
@@ -172,7 +162,6 @@ export default function Home() {
           ))}
         </div>
         
-        {/* --- Seção de Histórico --- */}
         <div className="w-full max-w-5xl mt-16 text-left">
           <h2 className={`text-3xl font-bold mb-6 text-center ${
             isDark ? "text-purple-50" : "text-orange-800"
@@ -201,7 +190,6 @@ export default function Home() {
               )}
             </div>
           ) : (
-            // Grid com os check-ins recentes
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {checkins.slice(0, 6).map((checkin) => {
                 const [data, horaCompleta] = checkin.data.split(' ');

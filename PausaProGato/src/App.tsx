@@ -6,7 +6,7 @@ import Home from "./pages/Home/Home";
 import FAQ from "./pages/Faq/Faq";
 import Integrantes from "./pages/Integrantes/Integrantes";
 import Sobre from "./pages/Sobre/Sobre";
-import Api from "./pages/paginaParaAPI/Api";
+import RegistroDiarioPage from "./pages/RegistroDiario/Registro";
 import RecursosAjuda from "./pages/Recursos/Recursos-ajuda";
 import Humor from "./pages/Check-inHumor/Humor";
 import Contato from "./pages/Contato/Contato";
@@ -38,7 +38,7 @@ function AppContent() {
         <Route path="/integrantes" element={<Integrantes />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/checkin" element={<Humor />} />
-        <Route path="/api" element={<Api />} />
+        <Route path="/registro" element={<RegistroDiarioPage />} />
         <Route path="/recursos" element={<RecursosAjuda />} />
         <Route path="/contato" element={<Contato />} />
       </Routes>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTheme } from "../../context/theme-provider";
 
 export default function Contato() {
-  const { isDark } = useTheme(); // ← Pegue o estado do tema
+  const { isDark } = useTheme(); 
   
   const [form, setForm] = useState({
     nomeCompleto: "",
@@ -60,7 +60,6 @@ export default function Contato() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           
-          {/* Nome Completo */}
           <div>
             <label htmlFor="nomeCompleto" className={`block font-medium ${
               isDark ? "text-purple-200" : "text-orange-700"
@@ -83,7 +82,6 @@ export default function Contato() {
             />
           </div>
 
-          {/* Telefone */}
           <div>
             <label htmlFor="numTel" className={`block font-medium ${
               isDark ? "text-purple-200" : "text-orange-700"
@@ -106,7 +104,6 @@ export default function Contato() {
             />
           </div>
 
-          {/* Email */}
           <div>
             <label htmlFor="email" className={`block font-medium ${
               isDark ? "text-purple-200" : "text-orange-700"
@@ -129,7 +126,6 @@ export default function Contato() {
             />
           </div>
 
-          {/* Mensagem */}
           <div>
             <label htmlFor="mensagem" className={`block font-medium ${
               isDark ? "text-purple-200" : "text-orange-700"
@@ -166,7 +162,6 @@ export default function Contato() {
             </div>
           </div>
 
-          {/* Botão Enviar */}
           <button
             type="submit"
             disabled={form.mensagem.length < 10}
@@ -184,7 +179,6 @@ export default function Contato() {
           </button>
         </form>
 
-        {/* Modal de Sucesso */}
         {success && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4">
             <div className={`rounded-2xl shadow-2xl p-8 max-w-md w-full text-center animate-fadeIn transition-colors duration-300 ${
@@ -193,7 +187,6 @@ export default function Contato() {
                 : "bg-linear-to-br from-orange-50 to-white border border-orange-200"
             }`}>
               
-              {/* Ícone de Sucesso */}
               <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
                 isDark ? "bg-purple-600" : "bg-orange-500"
               }`}>

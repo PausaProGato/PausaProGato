@@ -16,13 +16,13 @@ const Cabecalho: React.FC = () => {
 
   const links: NavLink[] = [
     { to: "/home", label: "Home" },
-    { to: "/faq", label: "FAQ" },
-    { to: "/sobre", label: "Sobre" },
-    { to: "/integrantes", label: "Integrantes" },
     { to: "/checkin", label: "Check-in de humor" },
-    { to: "/api", label: "API" },
     { to: "/recursos", label: "Recursos/Ajuda" },
+    { to: "/faq", label: "FAQ" },
+    { to: "/registro", label: "Registro Diário" },
+    { to: "/sobre", label: "Sobre" },
     { to: "/contato", label: "Contato"},
+    { to: "/integrantes", label: "Integrantes" },
   ];
 
   const handleLogoClick = () => {

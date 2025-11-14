@@ -7,7 +7,7 @@ export default function Footer(){
           className={`w-full mt-auto py-4 text-center font-semibold ${
             isDark
             ? "bg-violet-950 text-purple-100 shadow-lg"
-            : "bg-orange-600 text-orange-900 shadow-md"
+            : "bg-orange-600 text-orange-950 shadow-md"
           }`}
         >
             &copy; 2025- PausaProGato- Todos os direitos reservados

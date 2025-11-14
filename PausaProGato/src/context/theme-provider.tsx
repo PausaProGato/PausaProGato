@@ -1,4 +1,3 @@
-// context/theme-provider.tsx - VERSÃO SIMPLIFICADA
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 type Theme = 'dark' | 'light' | 'system';
