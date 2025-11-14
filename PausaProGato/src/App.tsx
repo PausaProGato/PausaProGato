@@ -9,6 +9,8 @@ import Sobre from "./pages/Sobre/Sobre";
 import RegistroDiarioPage from "./pages/RegistroDiario/Registro";
 import RecursosAjuda from "./pages/Recursos/Recursos-ajuda";
 import Humor from "./pages/Check-inHumor/Humor";
+import HumorHistorico from "./pages/HistoricoHumor/HumorHistorico";
+import HumorDetalhes from "./pages/DetalhesHumor/HumorDetalhes";
 import Contato from "./pages/Contato/Contato";
 import Footer from "./componentes/Footer/Footer";
 
@@ -38,6 +40,9 @@ function AppContent() {
         <Route path="/integrantes" element={<Integrantes />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/checkin" element={<Humor />} />
+        <Route path="/humor/historico" element={<HumorHistorico />} />
+        <Route path="/humor/historico/:periodo" element={<HumorHistorico />} />
+        <Route path="/humor/detalhe/:timestamp" element={<HumorDetalhes />} />
         <Route path="/registro" element={<RegistroDiarioPage />} />
         <Route path="/recursos" element={<RecursosAjuda />} />
         <Route path="/contato" element={<Contato />} />

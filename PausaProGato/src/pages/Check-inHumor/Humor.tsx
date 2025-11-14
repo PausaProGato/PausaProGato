@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "../../context/theme-provider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 type HumorOption = "feliz" | "neutro" | "cansado" | "triste" | "ansioso" | "apaixonado";
 
@@ -68,6 +68,7 @@ export default function HumorCheckin() {
     setDescricao("");
     setHumorSelecionado("");
     
+    // Redireciona para a Home após 2 segundos
     setTimeout(() => {
       navigate("/home"); 
     }, 2000);
@@ -179,6 +180,18 @@ export default function HumorCheckin() {
             Registrar
           </button>
         </form>
+        <div className="text-center mt-8">
+          <Link 
+          to="/humor/historico"
+          className={`inline-block px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
+            isDark 
+            ? "bg-purple-700 text-purple-200 hover:bg-purple-600 hover:shadow-purple-500/25" 
+            : "bg-orange-100 text-orange-700 hover:bg-orange-200 hover:shadow-orange-500/25"
+          }`}
+          >
+            Ver Meu Histórico de Humor
+          </Link>
+        </div>
 
         {mensagem && (
           <div className={`mt-6 p-4 rounded-xl text-center transition-all duration-300 ${
@@ -189,6 +202,7 @@ export default function HumorCheckin() {
               : mensagem.includes("Erro")
                 ? isDark
                   ? "bg-red-900 text-red-100 border border-red-700"
+                  // O TEXTO CORROMPIDO ESTAVA AQUI
                   : "bg-red-100 text-red-800 border border-red-300" 
                 : isDark
                   ? "bg-yellow-900 text-yellow-100 border border-yellow-700"
