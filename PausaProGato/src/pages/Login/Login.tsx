@@ -42,8 +42,8 @@ export default function LoginPage() {
   return (
     <section className={`relative min-h-screen flex items-center justify-center px-6 py-12 transition-colors duration-300 ${
       isDark
-        ? "bg-linear-to-br from-purple-900 to-violet-900"
-        : "bg-linear-to-br from-orange-200 to-orange-300"
+        ? "bg-violet-900"
+        : "bg-orange-300"
     }`}>
 
       <div className="absolute top-6 right-6 z-10">
@@ -55,7 +55,7 @@ export default function LoginPage() {
         <div className="space-y-6">
           <h1 className={`sm:text-[2.75rem] text-[3rem] font-extrabold leading-tight ${
             isDark
-              ? "text-white"
+              ? "text-purple-50"
               : "text-orange-800"
           }`}>
             Bem-vindo ao <span className={isDark ? "text-purple-400" : "text-orange-400"}>
@@ -74,11 +74,13 @@ export default function LoginPage() {
 
         <div className={`p-8 md:p-10 rounded-2xl shadow-xl w-full max-w-md mx-auto transition-colors duration-300 ${
           isDark
-            ? "bg-linear-to-br from-purple-800 to-violet-800 border border-purple-600"
+            ? "bg-violet-800 border border-purple-600"
             : "bg-orange-50 border border-orange-200"
         }`}>
           <h2 className={`text-3xl font-bold text-center mb-8 ${
-            isDark ? "text-white" : "text-gray-800"
+            isDark 
+            ? "text-orange-50" 
+            : "text-gray-900"
           }`}>
             Entrar / Cadastrar
           </h2>
@@ -87,7 +89,9 @@ export default function LoginPage() {
 
             <div>
               <label className={`block text-sm font-medium text-center mb-3 ${
-                isDark ? "text-purple-200" : "text-orange-700"
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-700"
               }`}>
                 Escolha seu avatar:
               </label>
@@ -124,7 +128,9 @@ export default function LoginPage() {
 
             <div>
               <label htmlFor="username" className={`block text-sm font-medium mb-2 ${
-                isDark ? "text-purple-200" : "text-orange-700"
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-700"
               }`}>
                 Nome de Usuário
               </label>
@@ -145,7 +151,9 @@ export default function LoginPage() {
 
             <div>
               <label htmlFor="password" className={`block text-sm font-medium mb-2 ${
-                isDark ? "text-purple-200" : "text-orange-700"
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-700"
               }`}>
                 Senha
               </label>
@@ -168,8 +176,8 @@ export default function LoginPage() {
               type="submit"
               className={`w-full font-bold py-3 rounded-lg transition-all duration-300 hover:scale-105 ${
                 isDark
-                  ? "bg-linear-to-r from-purple-600 to-violet-600 text-white hover:from-purple-700 hover:to-violet-700 shadow-lg hover:shadow-purple-500/25"
-                  : "bg-linear-to-r from-orange-500 to-orange-600 text-white hover:from-orange-600 hover:to-orange-700 shadow-lg hover:shadow-orange-500/25"
+                  ? "bg-violet-600 text-purple-50 hover:bg-violet-700 shadow-lg hover:shadow-purple-500/25"
+                  : "bg-orange-600 text-orange-50 hover:bg-orange-700 shadow-lg hover:shadow-orange-500/25"
               }`}
             >
               Entrar
@@ -190,21 +198,27 @@ export default function LoginPage() {
           <div
             className={`p-8 rounded-2xl shadow-xl w-full max-w-sm text-center transition-colors duration-300 ${
               isDark
-                ? "bg-linear-to-br from-purple-800 to-violet-800 border border-purple-600"
-                : "bg-white border border-orange-200"
+                ? "bg-violet-800 border border-purple-600"
+                : "bg-orange-50 border border-orange-200"
             }`}
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className={`text-2xl font-bold mb-4 ${
-              isDark ? "text-white" : "text-orange-800"
+              isDark 
+              ? "text-purple-50" 
+              : "text-orange-800"
             }`}>
               Bem-vindo!
             </h2>
             <p className={`text-lg mb-6 ${
-              isDark ? "text-purple-200" : "text-orange-700"
+              isDark 
+              ? "text-purple-200" 
+              : "text-orange-700"
             }`}>
               Olá, <span className={`font-bold ${
-                isDark ? "text-purple-300" : "text-orange-600"
+                isDark 
+                ? "text-purple-300" 
+                : "text-orange-600"
               }`}>
                 {username}
               </span>!
@@ -222,8 +236,8 @@ export default function LoginPage() {
               onClick={handleCloseModal}
               className={`w-full font-bold py-3 rounded-lg transition-all duration-300 hover:scale-105 ${
                 isDark
-                  ? "bg-linear-to-r from-purple-600 to-violet-600 text-white hover:from-purple-700 hover:to-violet-700"
-                  : "bg-linear-to-r from-orange-500 to-orange-600 text-white hover:from-orange-600 hover:to-orange-700"
+                  ? "bg-violet-600 text-purple-50 hover:bg-violet-700"
+                  : "bg-orange-600 text-orange-50 hover:bg-orange-700"
               }`}
             >
               Entrar no site

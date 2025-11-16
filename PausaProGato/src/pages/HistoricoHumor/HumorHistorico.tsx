@@ -66,13 +66,17 @@ export default function HumorHistorico() {
 
   return (
     <section className={`min-h-screen px-6 py-8 transition-colors duration-300 ${
-      isDark ? "bg-purple-900" : "bg-orange-200"
+      isDark 
+      ? "bg-purple-900" 
+      : "bg-orange-200"
     }`}>
       
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className={`text-3xl font-bold mb-4 ${
-            isDark ? "text-white" : "text-orange-800"
+            isDark 
+            ? "text-purple-50" 
+            : "text-orange-800"
           }`}>
             Seu Histórico de Humor
           </h1>
@@ -100,58 +104,78 @@ export default function HumorHistorico() {
 
         {estatisticas.total > 0 && (
           <div className={`mb-8 p-6 rounded-2xl ${
-            isDark ? "bg-purple-800" : "bg-orange-100"
+            isDark 
+            ? "bg-purple-800" 
+            : "bg-orange-100"
           }`}>
             <h2 className={`text-xl font-bold mb-4 ${
-              isDark ? "text-white" : "text-orange-800"
+              isDark 
+              ? "text-purple-50" 
+              : "text-orange-800"
             }`}>
               Estatísticas do Período
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
                 <div className={`text-2xl font-bold ${
-                  isDark ? "text-purple-300" : "text-orange-600"
+                  isDark 
+                  ? "text-purple-300" 
+                  : "text-orange-600"
                 }`}>
                   {estatisticas.total}
                 </div>
                 <div className={`text-sm ${
-                  isDark ? "text-purple-200" : "text-orange-700"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-700"
                 }`}>
                   Check-ins
                 </div>
               </div>
               <div className="text-center">
                 <div className={`text-2xl font-bold ${
-                  isDark ? "text-green-300" : "text-green-600"
+                  isDark 
+                  ? "text-green-300" 
+                  : "text-green-600"
                 }`}>
                   {humorEmojis[estatisticas.maisFrequente]}
                 </div>
                 <div className={`text-sm ${
-                  isDark ? "text-purple-200" : "text-orange-700"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-700"
                 }`}>
                   Mais frequente
                 </div>
               </div>
               <div className="text-center">
                 <div className={`text-2xl font-bold ${
-                  isDark ? "text-blue-300" : "text-blue-600"
+                  isDark 
+                  ? "text-blue-300" 
+                  : "text-blue-600"
                 }`}>
                   {estatisticas.mediaPorDia}
                 </div>
                 <div className={`text-sm ${
-                  isDark ? "text-purple-200" : "text-orange-700"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-700"
                 }`}>
                   Média/dia
                 </div>
               </div>
               <div className="text-center">
                 <div className={`text-2xl font-bold ${
-                  isDark ? "text-yellow-300" : "text-yellow-600"
+                  isDark 
+                  ? "text-yellow-300" 
+                  : "text-yellow-600"
                 }`}>
                   {estatisticas.ultimoHumor ? humorEmojis[estatisticas.ultimoHumor] : "-"}
                 </div>
                 <div className={`text-sm ${
-                  isDark ? "text-purple-200" : "text-orange-700"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-700"
                 }`}>
                   Último
                 </div>
@@ -182,7 +206,9 @@ export default function HumorHistorico() {
               <div 
                 key={index}
                 className={`p-6 rounded-2xl transition-all duration-300 ${
-                  isDark ? "bg-purple-800 hover:bg-purple-700" : "bg-orange-100 hover:bg-orange-50"
+                  isDark 
+                  ? "bg-purple-800 hover:bg-purple-700" 
+                  : "bg-orange-100 hover:bg-orange-50"
                 }`}
               >
                 <div className="flex items-start justify-between mb-3">
@@ -190,12 +216,16 @@ export default function HumorHistorico() {
                     <span className="text-3xl">{humorEmojis[checkin.humor]}</span>
                     <div>
                       <h3 className={`font-bold text-lg ${
-                        isDark ? "text-white" : "text-orange-800"
+                        isDark 
+                        ? "text-purple-50" 
+                        : "text-orange-800"
                       }`}>
                         {humorLabels[checkin.humor]}
                       </h3>
                       <p className={`text-sm ${
-                        isDark ? "text-purple-300" : "text-orange-600"
+                        isDark 
+                        ? "text-purple-300" 
+                        : "text-orange-600"
                       }`}>
                         {checkin.data}
                       </p>
@@ -205,7 +235,9 @@ export default function HumorHistorico() {
                 
                 {checkin.descricao && (
                   <p className={`mt-2 ${
-                    isDark ? "text-purple-200" : "text-orange-700"
+                    isDark 
+                    ? "text-purple-200" 
+                    : "text-orange-700"
                   }`}>
                     {checkin.descricao}
                   </p>

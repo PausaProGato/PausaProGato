@@ -42,18 +42,20 @@ export default function Contato() {
   return (
     <main id="contato" className={`flex-1 flex items-center justify-center py-8 px-4 transition-colors duration-300 ${
       isDark 
-        ? "bg-linear-to-br from-purple-900 to-violet-900" 
-        : "bg-linear-to-br from-orange-100 to-orange-200"
+        ? "bg-purple-900" 
+        : "bg-orange-200"
     }`}>
       
-      <div className={`shadow-lg rounded-2xl p-6 w-full max-w-lg transition-colors duration-300 ${
+      <div className={`shadow-lg rounded-2xl p-6 w-full max-w-lg duration-300 ${
         isDark 
-          ? "bg-linear-to-br from-purple-500 to-violet-400 border border-purple-600" 
-          : "bg-linear-to-br from-orange-50 to-white border border-orange-200"
+          ? "bg-purple-950 border border-purple-700" 
+          : "bg-orange-50 border-orange-200"
       }`}>
         
         <h2 className={`text-2xl font-bold text-center mb-6 ${
-          isDark ? "text-white" : "text-orange-800"
+          isDark 
+          ? "text-white" 
+          : "text-orange-800"
         }`}>
           Entre em contato conosco
         </h2>
@@ -62,7 +64,9 @@ export default function Contato() {
           
           <div>
             <label htmlFor="nomeCompleto" className={`block font-medium ${
-              isDark ? "text-purple-200" : "text-orange-700"
+              isDark 
+              ? "text-purple-200" 
+              : "text-orange-700"
             }`}>
               Nome Completo:
             </label>
@@ -84,7 +88,9 @@ export default function Contato() {
 
           <div>
             <label htmlFor="numTel" className={`block font-medium ${
-              isDark ? "text-purple-200" : "text-orange-700"
+              isDark 
+              ? "text-purple-200" 
+              : "text-orange-700"
             }`}>
               Número (Telefone):
             </label>
@@ -106,7 +112,9 @@ export default function Contato() {
 
           <div>
             <label htmlFor="email" className={`block font-medium ${
-              isDark ? "text-purple-200" : "text-orange-700"
+              isDark 
+              ? "text-purple-200" 
+              : "text-orange-700"
             }`}>
               E-mail:
             </label>
@@ -128,7 +136,9 @@ export default function Contato() {
 
           <div>
             <label htmlFor="mensagem" className={`block font-medium ${
-              isDark ? "text-purple-200" : "text-orange-700"
+              isDark 
+              ? "text-purple-200" 
+              : "text-orange-700"
             }`}>
               Motivo do seu contato:
             </label>
@@ -183,30 +193,38 @@ export default function Contato() {
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4">
             <div className={`rounded-2xl shadow-2xl p-8 max-w-md w-full text-center animate-fadeIn transition-colors duration-300 ${
               isDark 
-                ? "bg-linear-to-br from-purple-800 to-violet-800 border border-purple-600" 
-                : "bg-linear-to-br from-orange-50 to-white border border-orange-200"
+                ? "bg-violet-800 border border-purple-600" 
+                : "bg-orange-50  border border-orange-200"
             }`}>
               
               <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
-                isDark ? "bg-purple-600" : "bg-orange-500"
+                isDark 
+                ? "bg-purple-600" 
+                : "bg-orange-500"
               }`}>
                 <span className="text-2xl text-white">✓</span>
               </div>
               
               <h2 className={`text-2xl font-bold mb-2 ${
-                isDark ? "text-green-300" : "text-green-600"
+                isDark 
+                ? "text-green-300" 
+                : "text-green-600"
               }`}>
                 Mensagem Enviada!
               </h2>
               
               <p className={`mb-2 ${
-                isDark ? "text-purple-200" : "text-orange-700"
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-700"
               }`}>
                 Obrigada pelo seu contato, <strong>{form.nomeCompleto}</strong>!
               </p>
               
               <p className={`text-sm mb-6 ${
-                isDark ? "text-purple-300" : "text-orange-600"
+                isDark 
+                ? "text-purple-300" 
+                : "text-orange-600"
               }`}>
                 Retornaremos em breve através do telefone ou e-mail informado.
               </p>
@@ -215,8 +233,8 @@ export default function Contato() {
                 onClick={closeModal}
                 className={`w-full font-bold py-3 px-4 rounded-lg transition-all duration-300 hover:scale-105 ${
                   isDark
-                    ? "bg-linear-to-r from-purple-600 to-violet-600 text-white hover:from-purple-700 hover:to-violet-700"
-                    : "bg-linear-to-r from-orange-500 to-orange-600 text-white hover:from-orange-600 hover:to-orange-700"
+                    ? "bg-violet-800 text-white hover:bg-violet-700"
+                    : "bg-orange-600 text-white hover:bg-orange-700"
                 }`}
               >
                 Fechar

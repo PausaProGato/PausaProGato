@@ -12,21 +12,27 @@ export default function RecursosAjuda() {
       
       <div className={`max-w-4xl w-full rounded-2xl shadow-xl p-8 space-y-10 transition-colors duration-300 ${
         isDark 
-          ? "bg-linear-to-br from-purple-800 to-violet-800 border border-purple-600" 
-          : "bg-linear-to-br from-white to-orange-50 border border-orange-200"
+          ? "bg-purple-950 border border-purple-600" 
+          : "bg-orange-50 border border-orange-200"
       }`}>
         
         <div className="text-center">
           <h1 className={`text-3xl font-bold mb-4 ${
-            isDark ? "text-white" : "text-orange-700"
+            isDark 
+            ? "text-purple-50" 
+            : "text-orange-700"
           }`}>
             Recursos & Ajuda{" "}
-            <span className={isDark ? "text-purple-300" : "text-orange-500"}>
+            <span className={isDark 
+              ? "text-purple-300" 
+              : "text-orange-500"}>
               🧡
             </span>
           </h1>
           <p className={`text-lg ${
-            isDark ? "text-purple-200" : "text-orange-600"
+            isDark 
+            ? "text-purple-200" 
+            : "text-orange-600"
           }`}>
             Lembre-se: pedir ajuda é um ato de coragem.  
             Aqui estão alguns recursos que podem apoiar seu bem-estar emocional.
@@ -36,34 +42,52 @@ export default function RecursosAjuda() {
         {/* Dicas de bem-estar */}
         <div className={`p-6 rounded-xl transition-colors duration-300 ${
           isDark 
-            ? "bg-purple-700 border border-purple-500" 
+            ? "bg-purple-900 border border-purple-500" 
             : "bg-orange-100 border border-orange-200"
         }`}>
           <h2 className={`flex items-center gap-2 text-2xl font-semibold mb-4 ${
-            isDark ? "text-purple-100" : "text-orange-700"
+            isDark 
+            ? "text-purple-100" 
+            : "text-orange-700"
           }`}>
-            <span className={isDark ? "text-purple-300" : "text-orange-500"}>
+            <span className={isDark 
+              ? "text-purple-300" 
+              : "text-orange-500"}>
               🐾
             </span>
             Dicas de Bem-Estar
           </h2>
           <ul className={`space-y-3 ${
-            isDark ? "text-purple-200" : "text-orange-700"
+            isDark 
+            ? "text-purple-200" 
+            : "text-orange-700"
           }`}>
             <li className="flex items-start gap-2">
-              <span className={isDark ? "text-purple-300" : "text-orange-500"}>•</span>
+              <span className={isDark 
+                ? "text-purple-300" 
+                : "text-orange-500"}
+              >•</span>
               Faça pausas curtas durante o trabalho para respirar e alongar-se.
             </li>
             <li className="flex items-start gap-2">
-              <span className={isDark ? "text-purple-300" : "text-orange-500"}>•</span>
+              <span className={isDark 
+                ? "text-purple-300" 
+                : "text-orange-500"}
+              >•</span>
               Tire alguns minutos do dia para observar algo que te faz sorrir.
             </li>
             <li className="flex items-start gap-2">
-              <span className={isDark ? "text-purple-300" : "text-orange-500"}>•</span>
+              <span className={isDark 
+                ? "text-purple-300" 
+                : "text-orange-500"}
+              >•</span>
               Pratique respiração consciente por 1 minuto quando se sentir sobrecarregado.
             </li>
             <li className="flex items-start gap-2">
-              <span className={isDark ? "text-purple-300" : "text-orange-500"}>•</span>
+              <span className={isDark 
+                ? "text-purple-300" 
+                : "text-orange-500"}
+              >•</span>
               Não se cobre demais — dias difíceis também fazem parte do processo.
             </li>
           </ul>
@@ -72,35 +96,51 @@ export default function RecursosAjuda() {
         {/* Contatos de emergência */}
         <div className={`p-6 rounded-xl transition-colors duration-300 ${
           isDark 
-            ? "bg-purple-700 border border-purple-500" 
+            ? "bg-purple-900 border border-purple-500" 
             : "bg-orange-100 border border-orange-200"
         }`}>
           <h2 className={`flex items-center gap-2 text-2xl font-semibold mb-4 ${
-            isDark ? "text-purple-100" : "text-orange-700"
+            isDark 
+            ? "text-purple-100" 
+            : "text-orange-700"
           }`}>
             Apoio Emocional & Emergências
           </h2>
           <p className={`mb-4 ${
-            isDark ? "text-purple-200" : "text-orange-700"
+            isDark 
+            ? "text-purple-200" 
+            : "text-orange-700"
           }`}>
             Se você estiver passando por um momento difícil, procure ajuda.  
             Você não está sozinho.
           </p>
           <ul className={`space-y-4 ${
-            isDark ? "text-purple-200" : "text-orange-700"
+            isDark 
+            ? "text-purple-200" 
+            : "text-orange-700"
           }`}>
             <li>
-              <strong className={isDark ? "text-purple-100" : "text-orange-800"}>
+              <strong className={
+                isDark 
+                ? "text-purple-100" 
+                : "text-orange-800"}
+              >
                 CVV (Centro de Valorização da Vida)
               </strong> — <span className="font-bold">188</span>  
               <span className={`block text-sm mt-1 ${
-                isDark ? "text-purple-300" : "text-orange-600"
+                isDark 
+                ? "text-purple-300" 
+                : "text-orange-600"
               }`}>
                 Atendimento 24h, gratuito e confidencial
               </span>
             </li>
             <li>
-              <strong className={isDark ? "text-purple-100" : "text-orange-800"}>
+              <strong className={
+                isDark 
+                ? "text-purple-100" 
+                : "text-orange-800"}
+              >
                 Chat Online:
               </strong>{" "}
               <a
@@ -108,19 +148,29 @@ export default function RecursosAjuda() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`underline hover:opacity-80 transition-opacity ${
-                  isDark ? "text-purple-300" : "text-orange-600"
+                  isDark 
+                  ? "text-purple-300" 
+                  : "text-orange-600"
                 }`}
               >
                 cvv.org.br/chat
               </a>
             </li>
             <li>
-              <strong className={isDark ? "text-purple-100" : "text-orange-800"}>
+              <strong className={
+                isDark 
+                ? "text-purple-100" 
+                : "text-orange-800"}
+              >
                 SAMU (emergência médica):
               </strong> <span className="font-bold">192</span>
             </li>
             <li>
-              <strong className={isDark ? "text-purple-100" : "text-orange-800"}>
+              <strong className={
+                isDark 
+                ? "text-purple-100" 
+                : "text-orange-800"}
+              >
                 Polícia (emergência):
               </strong> <span className="font-bold">190</span>
             </li>
@@ -130,16 +180,20 @@ export default function RecursosAjuda() {
         {/* Recursos externos */}
         <div className={`p-6 rounded-xl transition-colors duration-300 ${
           isDark 
-            ? "bg-purple-700 border border-purple-500" 
+            ? "bg-purple-900 border border-purple-500" 
             : "bg-orange-100 border border-orange-200"
         }`}>
           <h2 className={`flex items-center gap-2 text-2xl font-semibold mb-4 ${
-            isDark ? "text-purple-100" : "text-orange-700"
+            isDark 
+            ? "text-purple-100" 
+            : "text-orange-700"
           }`}>
             Materiais & Apoio Online
           </h2>
           <ul className={`space-y-3 ${
-            isDark ? "text-purple-200" : "text-orange-700"
+            isDark 
+            ? "text-purple-200" 
+            : "text-orange-700"
           }`}>
             <li>
               <a
@@ -147,7 +201,9 @@ export default function RecursosAjuda() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`underline hover:opacity-80 transition-opacity ${
-                  isDark ? "text-purple-300" : "text-orange-600"
+                  isDark 
+                  ? "text-purple-300" 
+                  : "text-orange-600"
                 }`}
               >
                 Mindful.org
@@ -160,7 +216,9 @@ export default function RecursosAjuda() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`underline hover:opacity-80 transition-opacity ${
-                  isDark ? "text-purple-300" : "text-orange-600"
+                  isDark 
+                  ? "text-purple-300" 
+                  : "text-orange-600"
                 }`}
               >
                 UNICEF - Saúde Mental
@@ -173,7 +231,9 @@ export default function RecursosAjuda() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`underline hover:opacity-80 transition-opacity ${
-                  isDark ? "text-purple-300" : "text-orange-600"
+                  isDark 
+                  ? "text-purple-300" 
+                  : "text-orange-600"
                 }`}
               >
                 CVV - Centro de Valorização da Vida
@@ -186,7 +246,9 @@ export default function RecursosAjuda() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`underline hover:opacity-80 transition-opacity ${
-                  isDark ? "text-purple-300" : "text-orange-600"
+                  isDark 
+                  ? "text-purple-300" 
+                  : "text-orange-600"
                 }`}
               >
                 Vitat - Saúde Mental
@@ -196,13 +258,18 @@ export default function RecursosAjuda() {
           </ul>
         </div>
         
-          <p className="mb-2 text-center">
-            <span className={isDark ? "text-purple-300" : "text-orange-500"}>
+        <div className={`text-center ${
+            isDark
+            ? "text-purple-200"
+            : "text-orange-600"}`}>
+          <p>
+            <span >
               🐈
             </span>{" "}
             Lembre-se: até os gatos tiram uma pausa para se cuidar.
           </p>
-          <p className="text-center">Você merece descanso, carinho e leveza.</p>
+          <p>Você merece descanso, carinho e leveza.</p>
+        </div>
 
         <div className={`p-4 rounded-lg border-l-4 text-sm ${
           isDark 

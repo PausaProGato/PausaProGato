@@ -51,16 +51,23 @@ export default function HumorDetalhes() {
   if (!checkin) {
     return (
       <div className={`min-h-screen flex items-center justify-center ${
-        isDark ? "bg-purple-900" : "bg-orange-200"
+        isDark 
+        ? "bg-purple-900" 
+        : "bg-orange-200"
       }`}>
         <div className="text-center">
-          <p className={`text-xl ${isDark ? "text-white" : "text-orange-800"}`}>
+          <p className={`text-xl ${
+           isDark 
+            ? "text-purple-50" 
+            : "text-orange-800"}`}>
             Check-in não encontrado
           </p>
           <Link 
             to="/humor/historico"
             className={`mt-4 inline-block px-6 py-3 rounded-xl ${
-              isDark ? "bg-purple-600 text-white" : "bg-orange-500 text-white"
+              isDark 
+              ? "bg-purple-600 text-purple-50" 
+              : "bg-orange-500 text-orange-50"
             }`}
           >
             Voltar ao Histórico
@@ -72,17 +79,23 @@ export default function HumorDetalhes() {
 
   return (
     <section className={`min-h-screen px-6 py-12 ${
-      isDark ? "bg-purple-900" : "bg-orange-200"
+      isDark 
+      ? "bg-purple-900" 
+      : "bg-orange-200"
     }`}>
       
       <div className="max-w-2xl mx-auto">
         <div className={`rounded-2xl p-8 ${
-          isDark ? "bg-purple-800" : "bg-orange-100"
+          isDark 
+          ? "bg-purple-800" 
+          : "bg-orange-100"
         }`}>
           
           <div className="flex items-center justify-between mb-6">
             <h1 className={`text-2xl font-bold ${
-              isDark ? "text-white" : "text-orange-800"
+              isDark 
+              ? "text-purple-50" 
+              : "text-orange-800"
             }`}>
               Detalhes do Check-in
             </h1>
@@ -104,12 +117,16 @@ export default function HumorDetalhes() {
                 {humorEmojis[checkin.humor as keyof typeof humorEmojis] || "😼"}
               </span>
               <h2 className={`text-3xl font-bold ${
-                isDark ? "text-white" : "text-orange-800"
+                isDark 
+                ? "text-purple-50" 
+                : "text-orange-800"
               }`}>
                 {humorLabels[checkin.humor as keyof typeof humorLabels] || checkin.humor}
               </h2>
               <p className={`mt-2 ${
-                isDark ? "text-purple-300" : "text-orange-600"
+                isDark 
+                ? "text-purple-300" 
+                : "text-orange-600"
               }`}>
                 {checkin.data}
               </p>
@@ -118,7 +135,9 @@ export default function HumorDetalhes() {
             {checkin.descricao && (
               <div>
                 <h3 className={`text-lg font-semibold mb-3 ${
-                  isDark ? "text-purple-200" : "text-orange-700"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-700"
                 }`}>
                   Seu relato:
                 </h3>
@@ -137,8 +156,8 @@ export default function HumorDetalhes() {
                 to="/humor/checkin"
                 className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
                   isDark 
-                    ? "bg-purple-600 hover:bg-purple-700 text-white" 
-                    : "bg-orange-500 hover:bg-orange-600 text-white"
+                    ? "bg-purple-600 hover:bg-purple-700 text-purple-50" 
+                    : "bg-orange-500 hover:bg-orange-600 text-orange-50"
                 }`}
               >
                 Novo Check-in

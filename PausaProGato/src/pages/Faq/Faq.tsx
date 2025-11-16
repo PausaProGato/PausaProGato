@@ -56,19 +56,23 @@ export default function FAQ() {
   return (
     <div className={`min-h-screen py-12 px-6 transition-colors duration-300 ${
       isDark 
-        ? "bg-linear-to-br from-purple-900 to-violet-900" 
-        : "bg-linear-to-br from-orange-50 to-orange-100"
+        ? "bg-purple-900" 
+        : "bg-orange-200"
     }`}>
       <div className="max-w-4xl mx-auto">
         
         <div className="text-center mb-12">
           <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${
-            isDark ? "text-white" : "text-orange-800"
+            isDark 
+            ? "text-purple-50" 
+            : "text-orange-800"
           }`}>
             Perguntas Frequentes
           </h1>
           <p className={`text-lg ${
-            isDark ? "text-purple-200" : "text-orange-600"
+            isDark 
+            ? "text-purple-200" 
+            : "text-orange-600"
           }`}>
             Encontre respostas para as dúvidas mais comuns sobre o PausaProGato
           </p>
@@ -80,14 +84,16 @@ export default function FAQ() {
               key={index}
               className={`rounded-2xl transition-all duration-300 border-2 ${
                 isDark
-                  ? "bg-purple-800 border-purple-600 hover:border-purple-500"
-                  : "bg-white border-orange-200 hover:border-orange-300"
+                  ? "bg-purple-950 border border-purple-600 hover:border-purple-500"
+                  : "bg-orange-50 border border-orange-300 hover:border-orange-300"
               }`}
             >
               <button
                 onClick={() => toggleItem(index)}
                 className={`w-full px-6 py-4 text-left flex justify-between items-center transition-colors ${
-                  isDark ? "text-white" : "text-orange-900"
+                  isDark 
+                  ? "text-purple-50" 
+                  : "text-orange-900"
                 }`}
               >
                 <span className="font-semibold text-lg pr-4">{item.question}</span>
@@ -102,10 +108,14 @@ export default function FAQ() {
               
               {openItems.includes(index) && (
                 <div className={`px-6 pb-4 border-t ${
-                  isDark ? "border-purple-600" : "border-orange-200"
+                  isDark 
+                  ? "border-purple-600" 
+                  : "border-orange-200"
                 }`}>
                   <p className={`pt-3 ${
-                    isDark ? "text-purple-200" : "text-orange-700"
+                    isDark 
+                    ? "text-purple-200" 
+                    : "text-orange-700"
                   }`}>
                     {item.answer}
                   </p>

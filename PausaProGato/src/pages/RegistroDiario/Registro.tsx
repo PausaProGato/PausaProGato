@@ -5,28 +5,21 @@ import { useTheme } from "../../context/theme-provider";
 type RegistroDiario = {
   id?: number;
   data: string;
-  // Usuário
   nome: string;
   email: string;
   departamento: string;
   cargo: string;
-  // Humor
-  nivelHumor: number;
+  nivelHumor: string;
   descricaoHumor: string;
-  // Nível de Estresse
   nivelEstresse: string;
   descricaoEstresse: string;
-  // Qualidade do Sono
   qualidadeSono: string;
   horasDuracao: string;
   observacoesSono: string;
-  // Pausas
   quantidadePausas: string;
   duracaoMediaPausas: string;
-  // Exercícios
   quantidadeExercicios: string;
   tiposExercicios: string;
-  // Observações Gerais
   observacoesGerais: string;
 }
 
@@ -43,7 +36,7 @@ const RegistroDiarioPage = () => {
     email: registroEdicao?.email ?? "",
     departamento: registroEdicao?.departamento ?? "",
     cargo: registroEdicao?.cargo ?? "",
-    nivelHumor: registroEdicao?.nivelHumor ?? 0,
+    nivelHumor: registroEdicao?.nivelHumor ?? "",
     descricaoHumor: registroEdicao?.descricaoHumor ?? "",
     nivelEstresse: registroEdicao?.nivelEstresse ?? "",
     descricaoEstresse: registroEdicao?.descricaoEstresse ?? "",
@@ -57,7 +50,6 @@ const RegistroDiarioPage = () => {
     observacoesGerais: registroEdicao?.observacoesGerais ?? "",
   });
 
-  // Estado para controlar a mensagem de sucesso
   const [mensagemSucesso, setMensagemSucesso] = useState("");
 
   useEffect(() => {
@@ -66,7 +58,7 @@ const RegistroDiarioPage = () => {
     }
   }, [registroEdicao]);
 
-  const API_URL = "http://localhost:8080/registros";
+  const API_URL = "esperandorender";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { id, value, type } = e.target;
@@ -97,7 +89,6 @@ const RegistroDiarioPage = () => {
         
         setMensagemSucesso(mensagem);
         
-        // Limpa a mensagem após 3 segundos e navega para home
         setTimeout(() => {
           setMensagemSucesso("");
           navigate("/home");
@@ -120,7 +111,6 @@ const RegistroDiarioPage = () => {
         : "bg-orange-200"
     }`}>
       
-      {/* Mensagem de Sucesso */}
       {mensagemSucesso && (
         <div className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 p-4 rounded-lg shadow-lg border ${
           isDark
@@ -130,7 +120,9 @@ const RegistroDiarioPage = () => {
           <div className="flex items-center">
             <svg 
               className={`w-5 h-5 mr-2 ${
-                isDark ? "text-purple-300" : "text-orange-500"
+                isDark 
+                ? "text-purple-300" 
+                : "text-orange-500"
               }`} 
               fill="currentColor" 
               viewBox="0 0 20 20"
@@ -152,20 +144,23 @@ const RegistroDiarioPage = () => {
           : "bg-white border-orange-200"
       }`}>
         <h2 className={`text-[1.875rem] font-bold text-center mb-6 ${
-          isDark ? "text-purple-300" : "text-orange-600"
+          isDark 
+          ? "text-purple-200" 
+          : "text-orange-600"
         }`}>
           {registro.id ? "Editar Registro Diário" : "Novo Registro Diário"}
         </h2>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
-          {/* Usuário */}
           <fieldset className={`border rounded-lg p-4 ${
             isDark
-              ? "border-purple-600 bg-purple-900"
+              ? "border-purple-700"
               : "border-orange-300 bg-orange-50"
           }`}>
             <legend className={`text-[1.125rem] font-semibold px-2 ${
-              isDark ? "text-purple-300" : "text-orange-700"
+              isDark 
+              ? "text-purple-300" 
+              : "text-orange-700"
             }`}>
               Usuário
             </legend>
@@ -173,7 +168,9 @@ const RegistroDiarioPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="nome" className={`block mt-2 font-medium ${
-                  isDark ? "text-purple-200" : "text-orange-800"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-800"
                 }`}>
                   Nome:
                 </label>
@@ -183,7 +180,7 @@ const RegistroDiarioPage = () => {
                   onChange={handleChange}
                   value={registro.nome}
                   required
-                  className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
+                  className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 ${
                     isDark
                       ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
                       : "border-orange-300 focus:ring-orange-500 bg-white text-gray-900"
@@ -193,7 +190,9 @@ const RegistroDiarioPage = () => {
 
               <div>
                 <label htmlFor="email" className={`block mt-2 font-medium ${
-                  isDark ? "text-purple-200" : "text-orange-800"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-800"
                 }`}>
                   Email:
                 </label>
@@ -213,7 +212,9 @@ const RegistroDiarioPage = () => {
 
               <div>
                 <label htmlFor="departamento" className={`block mt-2 font-medium ${
-                  isDark ? "text-purple-200" : "text-orange-800"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-800"
                 }`}>
                   Departamento:
                 </label>
@@ -233,7 +234,9 @@ const RegistroDiarioPage = () => {
 
               <div>
                 <label htmlFor="cargo" className={`block mt-2 font-medium ${
-                  isDark ? "text-purple-200" : "text-orange-800"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-800"
                 }`}>
                   Cargo:
                 </label>
@@ -256,26 +259,27 @@ const RegistroDiarioPage = () => {
           {/* Humor */}
           <fieldset className={`border rounded-lg p-4 ${
             isDark
-              ? "border-purple-600 bg-purple-900"
+              ? "border-purple-600"
               : "border-orange-300 bg-orange-50"
           }`}>
             <legend className={`text-[1.125rem] font-semibold px-2 ${
-              isDark ? "text-purple-300" : "text-orange-700"
+              isDark 
+              ? "text-purple-300" 
+              : "text-orange-700"
             }`}>
               Humor
             </legend>
             
             <div>
               <label htmlFor="nivelHumor" className={`block mt-2 font-medium ${
-                isDark ? "text-purple-200" : "text-orange-800"
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-800"
               }`}>
-                Nível de Humor (1-10):
+                Nível de Humor:
               </label>
-              <input
-                type="number"
+              <select
                 id="nivelHumor"
-                min="1"
-                max="10"
                 onChange={handleChange}
                 value={registro.nivelHumor}
                 className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
@@ -283,12 +287,19 @@ const RegistroDiarioPage = () => {
                     ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
                     : "border-orange-300 focus:ring-orange-500 bg-white text-gray-900"
                 }`}
-              />
+              >
+                <option value="">Selecione...</option>
+                <option value="Baixo">Baixo</option>
+                <option value="Moderado">Moderado</option>
+                <option value="Alto">Alto</option>
+                <option value="Muito Alto">Muito Alto</option>
+              </select>
             </div>
-
             <div>
               <label htmlFor="descricaoHumor" className={`block mt-4 font-medium ${
-                isDark ? "text-purple-200" : "text-orange-800"
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-800"
               }`}>
                 Descrição do Humor:
               </label>
@@ -309,18 +320,22 @@ const RegistroDiarioPage = () => {
           {/* Nível de Estresse */}
           <fieldset className={`border rounded-lg p-4 ${
             isDark
-              ? "border-purple-600 bg-purple-900"
+              ? "border-purple-600"
               : "border-orange-300 bg-orange-50"
           }`}>
             <legend className={`text-[1.125rem] font-semibold px-2 ${
-              isDark ? "text-purple-300" : "text-orange-700"
+              isDark 
+              ? "text-purple-300" 
+              : "text-orange-700"
             }`}>
               Nível de Estresse
             </legend>
             
             <div>
               <label htmlFor="nivelEstresse" className={`block mt-2 font-medium ${
-                isDark ? "text-purple-200" : "text-orange-800"
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-800"
               }`}>
                 Nível de Estresse:
               </label>
@@ -344,7 +359,9 @@ const RegistroDiarioPage = () => {
 
             <div>
               <label htmlFor="descricaoEstresse" className={`block mt-4 font-medium ${
-                isDark ? "text-purple-200" : "text-orange-800"
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-800"
               }`}>
                 Descrição do Estresse:
               </label>
@@ -365,11 +382,13 @@ const RegistroDiarioPage = () => {
           {/* Qualidade do Sono */}
           <fieldset className={`border rounded-lg p-4 ${
             isDark
-              ? "border-purple-600 bg-purple-900"
+              ? "border-purple-600 "
               : "border-orange-300 bg-orange-50"
           }`}>
             <legend className={`text-[1.125rem] font-semibold px-2 ${
-              isDark ? "text-purple-300" : "text-orange-700"
+              isDark 
+              ? "text-purple-300" 
+              : "text-orange-700"
             }`}>
               Qualidade do Sono
             </legend>
@@ -377,7 +396,9 @@ const RegistroDiarioPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="qualidadeSono" className={`block mt-2 font-medium ${
-                  isDark ? "text-purple-200" : "text-orange-800"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-800"
                 }`}>
                   Qualidade do Sono:
                 </label>
@@ -423,7 +444,9 @@ const RegistroDiarioPage = () => {
 
             <div>
               <label htmlFor="observacoesSono" className={`block mt-4 font-medium ${
-                isDark ? "text-purple-200" : "text-orange-800"
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-800"
               }`}>
                 Observações do Sono:
               </label>
@@ -444,11 +467,13 @@ const RegistroDiarioPage = () => {
           {/* Pausas */}
           <fieldset className={`border rounded-lg p-4 ${
             isDark
-              ? "border-purple-600 bg-purple-900"
+              ? "border-purple-600"
               : "border-orange-300 bg-orange-50"
           }`}>
             <legend className={`text-[1.125rem] font-semibold px-2 ${
-              isDark ? "text-purple-300" : "text-orange-700"
+              isDark 
+              ? "text-purple-300" 
+              : "text-orange-700"
             }`}>
               Pausas
             </legend>
@@ -456,7 +481,9 @@ const RegistroDiarioPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="quantidadePausas" className={`block mt-2 font-medium ${
-                  isDark ? "text-purple-200" : "text-orange-800"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-800"
                 }`}>
                   Quantidade de Pausas:
                 </label>
@@ -475,7 +502,9 @@ const RegistroDiarioPage = () => {
 
               <div>
                 <label htmlFor="duracaoMediaPausas" className={`block mt-2 font-medium ${
-                  isDark ? "text-purple-200" : "text-orange-800"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-800"
                 }`}>
                   Duração Média:
                 </label>
@@ -498,11 +527,13 @@ const RegistroDiarioPage = () => {
           {/* Exercícios Feitos */}
           <fieldset className={`border rounded-lg p-4 ${
             isDark
-              ? "border-purple-600 bg-purple-900"
+              ? "border-purple-600"
               : "border-orange-300 bg-orange-50"
           }`}>
             <legend className={`text-[1.125rem] font-semibold px-2 ${
-              isDark ? "text-purple-300" : "text-orange-700"
+              isDark 
+              ? "text-purple-300" 
+              : "text-orange-700"
             }`}>
               Exercícios Feitos
             </legend>
@@ -510,7 +541,9 @@ const RegistroDiarioPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="quantidadeExercicios" className={`block mt-2 font-medium ${
-                  isDark ? "text-purple-200" : "text-orange-800"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-800"
                 }`}>
                   Quantidade:
                 </label>
@@ -529,7 +562,9 @@ const RegistroDiarioPage = () => {
 
               <div>
                 <label htmlFor="tiposExercicios" className={`block mt-2 font-medium ${
-                  isDark ? "text-purple-200" : "text-orange-800"
+                  isDark 
+                  ? "text-purple-200" 
+                  : "text-orange-800"
                 }`}>
                   Tipos de Exercícios:
                 </label>
@@ -552,18 +587,22 @@ const RegistroDiarioPage = () => {
           {/* Observações Gerais */}
           <fieldset className={`border rounded-lg p-4 ${
             isDark
-              ? "border-purple-600 bg-purple-900"
+              ? "border-purple-600"
               : "border-orange-300 bg-orange-50"
           }`}>
             <legend className={`text-[1.125rem] font-semibold px-2 ${
-              isDark ? "text-purple-300" : "text-orange-700"
+              isDark 
+              ? "text-purple-300" 
+              : "text-orange-700"
             }`}>
               Observações Gerais
             </legend>
             
             <div>
               <label htmlFor="observacoesGerais" className={`block mt-2 font-medium ${
-                isDark ? "text-purple-200" : "text-orange-800"
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-800"
               }`}>
                 Observações:
               </label>
@@ -586,7 +625,7 @@ const RegistroDiarioPage = () => {
             type="submit"
             className={`flex justify-center w-3/4 mx-auto text-white font-bold py-3 rounded-lg transition-colors duration-200 shadow-md ${
               isDark
-                ? "bg-purple-600 hover:bg-purple-700"
+                ? "bg-purple-800 hover:bg-purple-700"
                 : "bg-orange-500 hover:bg-orange-600"
             }`}
           >

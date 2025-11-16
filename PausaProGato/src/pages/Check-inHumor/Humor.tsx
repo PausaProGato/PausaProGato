@@ -68,7 +68,6 @@ export default function HumorCheckin() {
     setDescricao("");
     setHumorSelecionado("");
     
-    // Redireciona para a Home após 2 segundos
     setTimeout(() => {
       navigate("/home"); 
     }, 2000);
@@ -87,18 +86,22 @@ export default function HumorCheckin() {
       
       <div className={`shadow-xl rounded-2xl p-8 w-full max-w-md transition-colors duration-300 ${
         isDark
-          ? "bg-purple-800  border border-purple-600"
+          ? "bg-purple-950  border border-purple-700"
           : "bg-orange-50  border border-orange-200"
       }`}>
         
         <div className="text-center mb-8">
           <h1 className={`text-3xl font-bold mb-2 ${
-            isDark ? "text-white" : "text-orange-800"
+            isDark 
+            ? "text-white" 
+            : "text-orange-800"
           }`}>
             Check-in do Humor
           </h1>
           <p className={`text-lg ${
-            isDark ? "text-purple-200" : "text-orange-600"
+            isDark 
+            ? "text-purple-200" 
+            : "text-orange-600"
           }`}>
             Como você está se sentindo hoje?
           </p>
@@ -108,7 +111,9 @@ export default function HumorCheckin() {
           
           <div>
             <label className={`block text-sm font-medium mb-4 text-center ${
-              isDark ? "text-purple-200" : "text-orange-700"
+              isDark 
+              ? "text-purple-200" 
+              : "text-orange-700"
             }`}>
               Selecione seu humor:
             </label>
@@ -122,7 +127,7 @@ export default function HumorCheckin() {
                     humorSelecionado === key
                       ? `${getHumorColor(key as HumorOption)} scale-105 shadow-lg transform -translate-y-1`
                       : isDark
-                        ? "bg-purple-700 border-purple-500 hover:bg-purple-600 hover:scale-105"
+                        ? "bg-purple-900 border-purple-800 hover:bg-purple-700 hover:scale-105"
                         : "bg-orange-100 border-orange-300 hover:bg-orange-200 hover:scale-105"
                   }`}
                 >
@@ -173,7 +178,7 @@ export default function HumorCheckin() {
                   ? "bg-purple-400 text-purple-200 cursor-not-allowed opacity-50"
                   : "bg-orange-300 text-orange-100 cursor-not-allowed opacity-50"
                 : isDark
-                  ? "bg-purple-600 text-white hover:bg-purple-700 hover:shadow-purple-500/25 transform hover:scale-105"
+                  ? "bg-purple-800 text-white hover:bg-purple-700 hover:shadow-purple-500/25 transform hover:scale-105"
                   : "bg-orange-500 text-white hover:bg-orange-600 hover:shadow-orange-500/25 transform hover:scale-105"
             }`}
           >
@@ -185,7 +190,7 @@ export default function HumorCheckin() {
           to="/humor/historico"
           className={`inline-block px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
             isDark 
-            ? "bg-purple-700 text-purple-200 hover:bg-purple-600 hover:shadow-purple-500/25" 
+            ? "bg-purple-800 text-purple-200 hover:bg-purple-600 hover:shadow-purple-500/25" 
             : "bg-orange-100 text-orange-700 hover:bg-orange-200 hover:shadow-orange-500/25"
           }`}
           >
@@ -202,7 +207,6 @@ export default function HumorCheckin() {
               : mensagem.includes("Erro")
                 ? isDark
                   ? "bg-red-900 text-red-100 border border-red-700"
-                  // O TEXTO CORROMPIDO ESTAVA AQUI
                   : "bg-red-100 text-red-800 border border-red-300" 
                 : isDark
                   ? "bg-yellow-900 text-yellow-100 border border-yellow-700"

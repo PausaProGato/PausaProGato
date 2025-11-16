@@ -17,7 +17,7 @@ const Cabecalho: React.FC = () => {
   const links: NavLink[] = [
     { to: "/home", label: "Home" },
     { to: "/checkin", label: "Check-in de humor" },
-    { to: "/recursos", label: "Recursos/Ajuda" },
+    { to: "/recursos", label: "Ajuda" },
     { to: "/faq", label: "FAQ" },
     { to: "/registro", label: "Registro Diário" },
     { to: "/sobre", label: "Sobre" },
@@ -41,7 +41,6 @@ const Cabecalho: React.FC = () => {
       }`}
     >
       <div className="w-full mx-auto flex justify-between items-center p-3">
-        {/* Logo */}
         <div className="flex items-center gap-3">
           <img
             src="/logo.png"
@@ -62,10 +61,10 @@ const Cabecalho: React.FC = () => {
                   isActiveLink(link.to)
                     ? isDark
                       ? "bg-violet-800 text-purple-100" 
-                      : "bg-orange-500 text-white"
+                      : "bg-orange-500 text-orange-50"
                     : isDark
                     ? "hover:bg-violet-900 hover:text-purple-200"
-                    : "hover:bg-white hover:text-orange-600"
+                    : "hover:bg-orange-100 hover:text-orange-600"
                 }`}
               >
                 {link.label}
@@ -90,21 +89,21 @@ const Cabecalho: React.FC = () => {
           >
             <span
               className={`block h-1 w-full ${
-                isDark ? "bg-purple-200" : "bg-orange-900"
+                isDark ? "bg-purple-300" : "bg-orange-950"
               } transform transition duration-300 ${
                 menuOpen ? "rotate-45 translate-y-2.5" : ""
               }`}
             ></span>
             <span
               className={`block h-1 w-full ${
-                isDark ? "bg-purple-200" : "bg-orange-900"
+                isDark ? "bg-purple-300" : "bg-orange-950"
               } transition-opacity duration-300 ${
                 menuOpen ? "opacity-0" : "opacity-100"
               }`}
             ></span>
             <span
               className={`block h-1 w-full ${
-                isDark ? "bg-purple-200" : "bg-orange-900"
+                isDark ? "bg-purple-300" : "bg-orange-950"
               } transform transition duration-300 ${
                 menuOpen ? "-rotate-45 -translate-y-2.5" : ""
               }`}
@@ -132,10 +131,10 @@ const Cabecalho: React.FC = () => {
                   isActiveLink(link.to)
                     ? isDark
                       ? "bg-violet-800 text-purple-50"
-                      : "bg-orange-600 text-white"
+                      : "bg-orange-600 text-orange-50"
                     : isDark
-                    ? "hover:bg-purple-50 hover:text-violet-800"
-                    : "hover:bg-white hover:text-orange-600"
+                    ? "hover:bg-purple-100 hover:text-violet-900"
+                    : "hover:bg-orange-100 hover:text-orange-700"
                 }`}
               >
                 {link.label}

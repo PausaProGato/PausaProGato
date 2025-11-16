@@ -33,18 +33,22 @@ function Integrantes() {
   return (
     <div className={`min-h-screen flex flex-col items-center py-12 px-6 transition-colors duration-300 ${
       isDark 
-        ? "bg-violet-900" 
-        : "bg-orange-300"
+        ? "bg-purple-900" 
+        : "bg-orange-200"
     }`}>
       
       <div className="text-center mb-12">
         <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${
-          isDark ? "text-white" : "text-orange-700"
+          isDark 
+          ? "text-purple-50" 
+          : "text-orange-700"
         }`}>
           Nossa Equipe
         </h2>
         <p className={`text-lg ${
-          isDark ? "text-purple-200" : "text-orange-600"
+          isDark 
+          ? "text-purple-100" 
+          : "text-orange-600"
         }`}>
           Conheça as desenvolvedoras por trás do PausaProGato
         </p>
@@ -56,7 +60,7 @@ function Integrantes() {
             key={index}
             className={`rounded-2xl shadow-xl p-8 flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
               isDark 
-                ? "bg-purple-800 border border-purple-600 hover:border-purple-400" 
+                ? "bg-purple-950 border border-purple-700 hover:border-purple-400" 
                 : "bg-orange-50 border border-orange-200 hover:border-orange-300"
             }`}
           >
@@ -65,25 +69,31 @@ function Integrantes() {
               alt={pessoa.nome}
               className={`w-32 h-32 rounded-full object-cover shadow-lg mb-6 ${
                 isDark 
-                  ? "ring-4 ring-purple-400" 
-                  : "ring-4 ring-orange-400"
+                  ? "ring-3 ring-purple-600" 
+                  : "ring-3 ring-orange-400"
               }`}
             />
             
             <h3 className={`text-xl font-semibold text-center mb-2 ${
-              isDark ? "text-white" : "text-orange-800"
+              isDark 
+              ? "text-purple-50"  
+              : "text-orange-800"
             }`}>
               {pessoa.nome}
             </h3>
             
             <p className={`font-medium mb-1 ${
-              isDark ? "text-purple-200" : "text-orange-700"
+              isDark 
+              ? "text-purple-200" 
+              : "text-orange-700"
             }`}>
               {pessoa.rm}
             </p>
             
             <p className={`mb-6 ${
-              isDark ? "text-purple-300" : "text-orange-600"
+              isDark 
+              ? "text-purple-300" 
+              : "text-orange-600"
             }`}>
               Turma: {pessoa.turma}
             </p>
@@ -95,14 +105,14 @@ function Integrantes() {
                 rel="noopener noreferrer"
                 className={`flex flex-col items-center gap-2 transition-all duration-300 hover:scale-110 ${
                   isDark 
-                    ? "text-purple-200 hover:text-white" 
+                    ? "text-purple-200 hover:text-purple-50" 
                     : "text-orange-600 hover:text-orange-800"
                 }`}
                 title="GitHub"
               >
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                   isDark 
-                    ? "bg-purple-700 hover:bg-purple-600" 
+                    ? "bg-purple-800 hover:bg-purple-600" 
                     : "bg-orange-100 hover:bg-orange-200"
                 }`}>
                   <img 
@@ -120,14 +130,14 @@ function Integrantes() {
                 rel="noopener noreferrer"
                 className={`flex flex-col items-center gap-2 transition-all duration-300 hover:scale-110 ${
                   isDark 
-                    ? "text-purple-200 hover:text-white" 
+                    ? "text-purple-200 hover:text-purple-50" 
                     : "text-blue-600 hover:text-blue-800"
                 }`}
                 title="LinkedIn"
               >
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                   isDark 
-                    ? "bg-purple-700 hover:bg-purple-600" 
+                    ? "bg-purple-800 hover:bg-purple-600" 
                     : "bg-blue-100 hover:bg-blue-200"
                 }`}>
                   <img 

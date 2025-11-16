@@ -59,7 +59,7 @@ export default function Home() {
 
   const navigationCards = [
     {
-      title: "Recursos",
+      title: "Recursos/Ajuda",
       description: "Veja nossa página de recursos e ajuda",
       path: "/recursos",
     },
@@ -69,9 +69,14 @@ export default function Home() {
       path: "/checkin",
     },
     {
-      title: "API",
-      description: "Explore nossa integração e funcionalidades",
-      path: "/api",
+      title:"Histórico de Humor",
+      description: "Veja o seu histórico de humor",
+      path:"/humor/historico"
+    },
+    {
+      title: "Registro Diário",
+      description: "Faça o seu registro diário",
+      path: "/registro",
     },
     {
       title: "Sobre",
@@ -84,7 +89,7 @@ export default function Home() {
     <section
       className={`flex flex-col items-center justify-center min-h-[80vh] p-8 text-center transition-colors duration-300 ${
         isDark
-          ? "bg-purple-900 text-white"
+          ? "bg-purple-900 text-purple-50"
           : "bg-orange-200 text-orange-900"
       }`}
     >
@@ -93,8 +98,13 @@ export default function Home() {
           isDark
             ? "text-purple-50"
             : "text-orange-800"
-        }`}>
-          Bem-vindo/a ao <span className={isDark ? "text-gray-950" : "text-orange-600"}>
+        }`}
+        >
+          Bem-vindo/a ao <span className={
+            isDark 
+            ? "text-gray-950" 
+            : "text-orange-600"}
+          >
             PausaProGato
           </span>, {user.username || "visitante"}! 🐾
         </h1>
@@ -104,7 +114,7 @@ export default function Home() {
             <img
               src={`/img/${user.avatar.replace(/\s+/g, '').toLowerCase()}.png`}
               alt={user.avatar}
-              className={`w-32 h-32 rounded-full shadow-lg p-1 transition-all duration-300 ${
+              className={`w-34 h-34 rounded-full shadow-lg p-1 transition-all duration-300 ${
                 isDark
                   ? "ring-4 ring-purple-600 hover:ring-purple-400"
                   : "ring-4 ring-orange-600 hover:ring-orange-400"
@@ -134,27 +144,32 @@ export default function Home() {
           Aqui é onde você poderá explorar tudo o que o <strong>PausaProGato</strong> oferece para o seu bem-estar e tranquilidade no trabalho.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-3 w-full mt-12">
           {navigationCards.map((card, index) => (
             <Link
               key={index}
               to={card.path}
-              className={`rounded-2xl p-6 shadow-lg border-2 transition-all duration-300 
+              className={`rounded-2xl p-2 shadow-lg border-2 transition-all duration-300 
                           transform hover:scale-105 hover:shadow-xl 
-                          flex flex-col items-center justify-center min-h-40 no-underline
-                          ${isDark
-                ? "bg-purple-800 border-purple-600 hover:bg-purple-700 hover:border-purple-500"
-                : "bg-linear-to-br from-orange-50 to-orange-100 border-orange-300 hover:from-orange-100 hover:to-orange-200 hover:border-orange-400"
+                          flex flex-col items-center justify-center min-h-38 no-underline
+                          ${
+                            isDark
+                            ? "bg-purple-950 border-purple-700 hover:bg-purple-900 hover:border-purple-500"
+                            : "bg-orange-100 border-orange-300 hover:bg-orange-200 hover:border-orange-400"
               }`}
             >
               <h3 className={`text-xl font-semibold mb-2 ${
-                isDark ? "text-white" : "text-orange-800"
+                isDark 
+                ? "text-purple-50" 
+                : "text-orange-800"
               }`}>
                 {card.title}
               </h3>
               
               <p className={`text-sm ${
-                isDark ? "text-purple-200" : "text-orange-600"
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-600"
               }`}>
                 {card.description}
               </p>
@@ -164,16 +179,24 @@ export default function Home() {
         
         <div className="w-full max-w-5xl mt-16 text-left">
           <h2 className={`text-3xl font-bold mb-6 text-center ${
-            isDark ? "text-purple-50" : "text-orange-800"
+            isDark 
+            ? "text-purple-50" 
+            : "text-orange-800"
           }`}>
             Seu Histórico de Humor
           </h2>
 
           {checkins.length === 0 ? (
             <div className={`p-6 rounded-2xl text-center ${
-              isDark ? "bg-purple-800 border border-purple-600" : "bg-orange-50 border border-orange-200"
+              isDark 
+              ? "bg-purple-800 border border-purple-600" 
+              : "bg-orange-50 border border-orange-200"
             }`}>
-              <p className={isDark ? "text-purple-200" : "text-orange-600"}>
+              <p className={
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-600"
+                }>
                 {user.username
                   ? "Você ainda não registrou nenhum humor."
                   : "Faça login para ver seu histórico de humor."}
@@ -182,7 +205,9 @@ export default function Home() {
                 <Link
                   to="/checkin"
                   className={`inline-block mt-4 font-bold py-2 px-4 rounded-lg transition-all ${
-                    isDark ? "bg-purple-600 text-white hover:bg-purple-700" : "bg-orange-500 text-white hover:bg-orange-600"
+                    isDark 
+                    ? "bg-purple-600 text-purple-50 hover:bg-purple-700" 
+                    : "bg-orange-500 text-orange-50 hover:bg-orange-600"
                   }`}
                 >
                   Fazer meu primeiro check-in
@@ -209,7 +234,9 @@ export default function Home() {
 
                     </div>
                     <p className={`text-sm ${
-                      isDark ? 'text-purple-100' : 'text-gray-800'
+                      isDark 
+                      ? "text-purple-100"
+                      : "text-gray-800"
                     }`}>
                       {checkin.descricao || "Nenhuma descrição."}
                     </p>

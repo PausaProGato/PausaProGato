@@ -6,7 +6,7 @@ export default function BotaoTema() {
   return (
     <button
       onClick={() => toggleTheme(isDark ? 'light' : 'dark')}
-      className="p-2 rounded-full bg-white shadow-lg transition-all duration-200"
+      className="p-2 rounded-full bg-neutral-50 shadow-lg transition-all duration-200"
       title={isDark ? "Mudar para tema claro" : "Mudar para tema escuro"}
     >
       {isDark ? '🐈' : '🐈‍⬛'}
