@@ -10,7 +10,7 @@ export default function Footer(){
             : "bg-orange-500 text-orange-950 shadow-md"
           }`}
         >
-            &copy; 2025- PausaProGato- Todos os direitos reservados
+            &copy; 2025- PausaProGato - Todos os direitos reservados
         </p>
     );
 }

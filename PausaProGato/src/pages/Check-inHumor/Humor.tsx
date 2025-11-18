@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "../../context/theme-provider";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 
 type HumorOption = "feliz" | "neutro" | "cansado" | "triste" | "ansioso" | "apaixonado";
+
+interface Checkin {
+  humor: HumorOption;
+  descricao: string;
+  data: string;
+  timestamp: number;
+}
 
 const humorEmojis: Record<HumorOption, string> = {
   feliz: "😺",
@@ -19,7 +26,7 @@ const humorLabels: Record<HumorOption, string> = {
   cansado: "Cansado",
   triste: "Triste",
   ansioso: "Ansioso",
-  apaixonado: "apaixonado"
+  apaixonado: "Apaixonado"
 };
 
 const humorCores: Record<HumorOption, { claro: string; escuro: string }> = {
@@ -32,11 +39,36 @@ const humorCores: Record<HumorOption, { claro: string; escuro: string }> = {
 };
 
 export default function HumorCheckin() {
+  const { timestamp } = useParams<{ timestamp: string }>();
   const [humorSelecionado, setHumorSelecionado] = useState<HumorOption | "">("");
   const [descricao, setDescricao] = useState("");
   const [mensagem, setMensagem] = useState("");
   const { isDark } = useTheme();
   const navigate = useNavigate();
+
+  const isEditando = !!timestamp;
+
+  useEffect(() => {
+    if (isEditando) {
+      const user = JSON.parse(sessionStorage.getItem("usuario") || "{}");
+      if (user.username && timestamp) {
+        const userCheckinKey = `checkins_${user.username}`;
+        const checkinsSalvos = JSON.parse(localStorage.getItem(userCheckinKey) || "[]");
+        
+        const checkinExistente = checkinsSalvos.find(
+          (c: Checkin) => c.timestamp === parseInt(timestamp)
+        );
+        
+        if (checkinExistente) {
+          setHumorSelecionado(checkinExistente.humor);
+          setDescricao(checkinExistente.descricao);
+        } else {
+          setMensagem("Check-in não encontrado!");
+          setTimeout(() => navigate("/humor/historico"), 2000);
+        }
+      }
+    }
+  }, [timestamp, isEditando, navigate]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,30 +83,49 @@ export default function HumorCheckin() {
       setMensagem("Erro: Você precisa estar logado para registrar seu humor.");
       return;
     }
-    const userCheckinKey = `checkins_${user.username}`;
 
-    const novoCheckin = {
+    const userCheckinKey = `checkins_${user.username}`;
+    const checkinsSalvos = JSON.parse(localStorage.getItem(userCheckinKey) || "[]");
+
+    const novoCheckin: Checkin = {
       humor: humorSelecionado,
       descricao,
-      data: new Date().toLocaleString('pt-BR'),
-      timestamp: new Date().getTime()
+      data: isEditando 
+        ? checkinsSalvos.find((c: Checkin) => c.timestamp === parseInt(timestamp!))?.data 
+          || new Date().toLocaleString('pt-BR')
+        : new Date().toLocaleString('pt-BR'),
+      timestamp: isEditando ? parseInt(timestamp!) : Date.now()
     };
 
-    const checkinsSalvos = JSON.parse(localStorage.getItem(userCheckinKey) || "[]");
-    const novosCheckins = [novoCheckin, ...checkinsSalvos].slice(0, 50);
+    let novosCheckins;
+    
+    if (isEditando) {
+      novosCheckins = checkinsSalvos.map((c: Checkin) =>
+        c.timestamp === parseInt(timestamp!) ? novoCheckin : c
+      );
+    } else {
+      novosCheckins = [novoCheckin, ...checkinsSalvos].slice(0, 50);
+    }
+
     localStorage.setItem(userCheckinKey, JSON.stringify(novosCheckins));
 
-    setMensagem(`Check-in ${humorLabels[humorSelecionado]} registrado com sucesso! 🐾`);
-    setDescricao("");
-    setHumorSelecionado("");
+    setMensagem(
+      isEditando 
+        ? `Check-in ${humorLabels[humorSelecionado]} atualizado com sucesso! 🐾`
+        : `Check-in ${humorLabels[humorSelecionado]} registrado com sucesso! 🐾`
+    );
     
     setTimeout(() => {
-      navigate("/home"); 
+      navigate("/humor/historico");
     }, 2000);
   };
 
   const getHumorColor = (humor: HumorOption) => {
     return isDark ? humorCores[humor].escuro : humorCores[humor].claro;
+  };
+
+  const cancelar = () => {
+    navigate("/home");
   };
 
   return (
@@ -86,24 +137,24 @@ export default function HumorCheckin() {
       
       <div className={`shadow-xl rounded-2xl p-8 w-full max-w-md transition-colors duration-300 ${
         isDark
-          ? "bg-purple-950  border border-purple-700"
-          : "bg-orange-50  border border-orange-200"
+          ? "bg-purple-950 border border-purple-700"
+          : "bg-orange-50 border border-orange-300"
       }`}>
         
         <div className="text-center mb-8">
           <h1 className={`text-3xl font-bold mb-2 ${
             isDark 
-            ? "text-white" 
+            ? "text-purple-50" 
             : "text-orange-800"
           }`}>
-            Check-in do Humor
+            {isEditando ? "Editar Check-in" : "Check-in do Humor"}
           </h1>
           <p className={`text-lg ${
             isDark 
-            ? "text-purple-200" 
+            ? "text-purple-100" 
             : "text-orange-600"
           }`}>
-            Como você está se sentindo hoje?
+            {isEditando ? "Atualize o que deseja mudar" : "Como você está se sentindo hoje?"}
           </p>
         </div>
 
@@ -112,10 +163,10 @@ export default function HumorCheckin() {
           <div>
             <label className={`block text-sm font-medium mb-4 text-center ${
               isDark 
-              ? "text-purple-200" 
+              ? "text-purple-100" 
               : "text-orange-700"
             }`}>
-              Selecione seu humor:
+              Selecione como esta o seu humor:
             </label>
             <div className="grid grid-cols-3 gap-3">
               {Object.entries(humorEmojis).map(([key, emoji]) => (
@@ -144,7 +195,9 @@ export default function HumorCheckin() {
 
           <div>
             <label htmlFor="descricao" className={`block text-sm font-medium mb-2 ${
-              isDark ? "text-purple-200" : "text-orange-700"
+              isDark 
+              ? "text-purple-100" 
+              : "text-orange-700"
             }`}>
               Quer compartilhar mais sobre seu dia?
               <span className="text-xs ml-1 opacity-70">(opcional)</span>
@@ -163,36 +216,53 @@ export default function HumorCheckin() {
               maxLength={500}
             />
             <div className={`text-right text-xs mt-1 ${
-              isDark ? "text-purple-300" : "text-orange-600"
+              isDark 
+              ? "text-purple-200" 
+              : "text-orange-600"
             }`}>
               {descricao.length}/500 caracteres
             </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={!humorSelecionado}
-            className={`w-full font-bold py-4 rounded-xl transition-all duration-300 shadow-lg ${
-              !humorSelecionado
-                ? isDark
-                  ? "bg-purple-400 text-purple-200 cursor-not-allowed opacity-50"
-                  : "bg-orange-300 text-orange-100 cursor-not-allowed opacity-50"
-                : isDark
-                  ? "bg-purple-800 text-white hover:bg-purple-700 hover:shadow-purple-500/25 transform hover:scale-105"
-                  : "bg-orange-500 text-white hover:bg-orange-600 hover:shadow-orange-500/25 transform hover:scale-105"
-            }`}
-          >
-            Registrar
-          </button>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={cancelar}
+              className={`flex-1 font-bold py-4 rounded-xl transition-all duration-300 shadow-lg ${
+                isDark
+                  ? "bg-purple-800 text-purple-200 hover:bg-purple-600 hover:shadow-purple-500/25"
+                  : "bg-orange-200 text-orange-700 hover:bg-orange-300 hover:shadow-orange-500/25"
+              }`}
+            >
+              Cancelar
+            </button>
+            
+            <button
+              type="submit"
+              disabled={!humorSelecionado}
+              className={`flex-1 font-bold py-4 rounded-xl transition-all duration-300 shadow-lg ${
+                !humorSelecionado
+                  ? isDark
+                    ? "bg-purple-400 text-purple-200 cursor-not-allowed opacity-50"
+                    : "bg-orange-300 text-orange-100 cursor-not-allowed opacity-50"
+                  : isDark
+                    ? "bg-purple-800 text-white hover:bg-purple-700 hover:shadow-purple-500/25 transform hover:scale-105"
+                    : "bg-orange-500 text-white hover:bg-orange-600 hover:shadow-orange-500/25 transform hover:scale-105"
+              }`}
+            >
+              {isEditando ? "Atualizar" : "Registrar"}
+            </button>
+          </div>
         </form>
+
         <div className="text-center mt-8">
           <Link 
-          to="/humor/historico"
-          className={`inline-block px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
-            isDark 
-            ? "bg-purple-800 text-purple-200 hover:bg-purple-600 hover:shadow-purple-500/25" 
-            : "bg-orange-100 text-orange-700 hover:bg-orange-200 hover:shadow-orange-500/25"
-          }`}
+            to="/humor/historico"
+            className={`inline-block px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
+              isDark 
+              ? "bg-purple-800 text-purple-200 hover:bg-purple-600 hover:shadow-purple-500/25" 
+              : "bg-orange-100 text-orange-700 hover:bg-orange-200 hover:shadow-orange-500/25"
+            }`}
           >
             Ver Meu Histórico de Humor
           </Link>
@@ -204,7 +274,7 @@ export default function HumorCheckin() {
               ? isDark
                 ? "bg-green-900 text-green-100 border border-green-700"
                 : "bg-green-100 text-green-800 border border-green-300"
-              : mensagem.includes("Erro")
+              : mensagem.includes("Erro") || mensagem.includes("não encontrado")
                 ? isDark
                   ? "bg-red-900 text-red-100 border border-red-700"
                   : "bg-red-100 text-red-800 border border-red-300" 
@@ -213,6 +283,16 @@ export default function HumorCheckin() {
                   : "bg-yellow-100 text-yellow-800 border border-yellow-300"
           }`}>
             <p className="font-medium">{mensagem}</p>
+          </div>
+        )}
+
+        {isEditando && (
+          <div className={`mt-4 p-3 rounded-xl text-center text-sm ${
+            isDark 
+              ? "bg-purple-800 text-purple-200 border border-purple-600" 
+              : "bg-orange-200 text-orange-700 border border-orange-300"
+          }`}>
+            Editando check-in existente
           </div>
         )}
       </div>

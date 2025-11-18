@@ -177,7 +177,6 @@ export default function RecursosAjuda() {
           </ul>
         </div>
 
-        {/* Recursos externos */}
         <div className={`p-6 rounded-xl transition-colors duration-300 ${
           isDark 
             ? "bg-purple-900 border border-purple-500" 
@@ -209,21 +208,6 @@ export default function RecursosAjuda() {
                 Mindful.org
               </a>{" "}
               — práticas de atenção plena e relaxamento.
-            </li>
-            <li>
-              <a
-                href="https://www.unicef.org/brazil/saude-mental"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`underline hover:opacity-80 transition-opacity ${
-                  isDark 
-                  ? "text-purple-300" 
-                  : "text-orange-600"
-                }`}
-              >
-                UNICEF - Saúde Mental
-              </a>{" "}
-              — dicas e conteúdos sobre autocuidado emocional.
             </li>
             <li>
               <a
@@ -263,8 +247,12 @@ export default function RecursosAjuda() {
             ? "text-purple-200"
             : "text-orange-600"}`}>
           <p>
-            <span >
-              🐈
+            <span>
+            {
+              isDark
+              ? '🐈‍⬛'
+              : '🐈' 
+            }
             </span>{" "}
             Lembre-se: até os gatos tiram uma pausa para se cuidar.
           </p>

@@ -39,10 +39,11 @@ function AppContent() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/integrantes" element={<Integrantes />} />
         <Route path="/sobre" element={<Sobre />} />
-        <Route path="/checkin" element={<Humor />} />
+        <Route path="/humor/checkin" element={<Humor />} />
+        <Route path="/humor/checkin/:timestamp" element={<Humor />} />
+        <Route path="/humor/detalhes/:timestamp" element={<HumorDetalhes />} />
         <Route path="/humor/historico" element={<HumorHistorico />} />
         <Route path="/humor/historico/:periodo" element={<HumorHistorico />} />
-        <Route path="/humor/detalhe/:timestamp" element={<HumorDetalhes />} />
         <Route path="/registro" element={<RegistroDiarioPage />} />
         <Route path="/recursos" element={<RecursosAjuda />} />
         <Route path="/contato" element={<Contato />} />

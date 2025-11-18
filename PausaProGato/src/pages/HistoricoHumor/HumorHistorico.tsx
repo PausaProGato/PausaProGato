@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/theme-provider";
 
 type HumorOption = "feliz" | "neutro" | "cansado" | "triste" | "ansioso" | "apaixonado";
@@ -33,8 +33,13 @@ export default function HumorHistorico() {
   const { periodo = "semana" } = useParams<{ periodo?: string }>();
   const [checkins, setCheckins] = useState<Checkin[]>([]);
   const { isDark } = useTheme();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    carregarCheckins();
+  }, [periodo]);
+
+  const carregarCheckins = () => {
     const user = JSON.parse(sessionStorage.getItem("usuario") || "{}");
     if (user.username) {
       const userCheckinKey = `checkins_${user.username}`;
@@ -43,7 +48,7 @@ export default function HumorHistorico() {
       const checkinsFiltrados = filtrarPorPeriodo(checkinsSalvos, periodo);
       setCheckins(checkinsFiltrados);
     }
-  }, [periodo]);
+  };
 
   const filtrarPorPeriodo = (checkins: Checkin[], periodo: string): Checkin[] => {
     const agora = new Date().getTime();
@@ -62,6 +67,39 @@ export default function HumorHistorico() {
     }
   };
 
+  const removerCheckin = (timestamp: number) => {
+    if (window.confirm("Tem certeza que deseja excluir este check-in?")) {
+      const user = JSON.parse(sessionStorage.getItem("usuario") || "{}");
+      if (user.username) {
+        const userCheckinKey = `checkins_${user.username}`;
+        const checkinsSalvos = JSON.parse(localStorage.getItem(userCheckinKey) || "[]");
+        const novosCheckins = checkinsSalvos.filter((checkin: Checkin) => checkin.timestamp !== timestamp);
+        
+        localStorage.setItem(userCheckinKey, JSON.stringify(novosCheckins));
+        carregarCheckins(); 
+      }
+    }
+  };
+
+  const limparTodosCheckins = () => {
+    if (window.confirm("Tem certeza que deseja excluir TODOS os check-ins?")) {
+      const user = JSON.parse(sessionStorage.getItem("usuario") || "{}");
+      if (user.username) {
+        const userCheckinKey = `checkins_${user.username}`;
+        localStorage.removeItem(userCheckinKey);
+        setCheckins([]);
+      }
+    }
+  };
+
+  const editarCheckin = (timestamp: number) => {
+    navigate(`/humor/checkin/${timestamp}`);
+  };
+
+  const verDetalhes = (timestamp: number) => {
+    navigate(`/humor/detalhes/${timestamp}`);
+  };
+
   const estatisticas = calcularEstatisticas(checkins);
 
   return (
@@ -72,16 +110,52 @@ export default function HumorHistorico() {
     }`}>
       
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className={`text-3xl font-bold mb-4 ${
-            isDark 
-            ? "text-purple-50" 
-            : "text-orange-800"
-          }`}>
-            Seu Histórico de Humor
-          </h1>
-          
-          <div className="flex justify-center space-x-4 mb-6">
+        <div className={`mb-8 rounded-2xl p-6 ${
+          isDark 
+          ? "bg-purple-950" 
+          : "bg-orange-100"
+        }`}>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+            <div>
+              <h1 className={`text-3xl font-bold mb-2 ${
+                isDark 
+                ? "text-purple-50" 
+                : "text-orange-800"
+              }`}>
+                Seu Histórico de Humor
+              </h1>
+              <p className={
+                isDark 
+                ? "text-purple-300" 
+                : "text-orange-600"
+                }>
+                {checkins.length} check-in(s) neste período
+              </p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={() => navigate("/humor/checkin")}
+                className={`font-bold py-2 px-4 rounded-lg transition shadow-md ${
+                  isDark 
+                    ? "bg-purple-800 text-purple-50 hover:bg-purple-900" 
+                    : "bg-orange-500 text-orange-50 hover:bg-orange-600"
+                }`}
+              >
+                + Novo Check-in
+              </button>
+              {checkins.length > 0 && (
+                <button
+                  onClick={limparTodosCheckins}
+                  className="bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition shadow-md"
+                >
+                  x Limpar Todos
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="flex justify-center space-x-4">
             {["hoje", "semana", "mes", "todos"].map((p) => (
               <Link
                 key={p}
@@ -89,11 +163,11 @@ export default function HumorHistorico() {
                 className={`px-4 py-2 rounded-lg transition-all duration-300 ${
                   periodo === p
                     ? isDark 
-                      ? "bg-purple-600 text-white shadow-lg"
-                      : "bg-orange-500 text-white shadow-lg"
+                      ? "bg-purple-800 text-purple-50 shadow-lg"
+                      : "bg-orange-500 text-orange-50 shadow-lg"
                     : isDark
-                      ? "bg-purple-700 text-purple-200 hover:bg-purple-600"
-                      : "bg-orange-100 text-orange-700 hover:bg-orange-300"
+                      ? "bg-purple-900 text-purple-200 hover:bg-purple-800"
+                      : "bg-orange-200 text-orange-700 hover:bg-orange-300"
                 }`}
               >
                 {p.charAt(0).toUpperCase() + p.slice(1)}
@@ -105,7 +179,7 @@ export default function HumorHistorico() {
         {estatisticas.total > 0 && (
           <div className={`mb-8 p-6 rounded-2xl ${
             isDark 
-            ? "bg-purple-800" 
+            ? "bg-purple-950" 
             : "bg-orange-100"
           }`}>
             <h2 className={`text-xl font-bold mb-4 ${
@@ -187,14 +261,16 @@ export default function HumorHistorico() {
         <div className="space-y-4">
           {checkins.length === 0 ? (
             <div className={`text-center py-12 rounded-2xl ${
-              isDark ? "bg-purple-800 text-purple-200" : "bg-orange-100 text-orange-700"
+              isDark 
+              ? "bg-purple-950 text-purple-100" 
+              : "bg-orange-100 text-orange-700"
             }`}>
               <p className="text-lg mb-4">Nenhum check-in encontrado para este período</p>
               <Link 
                 to="/humor/checkin"
                 className={`inline-block px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
                   isDark 
-                    ? "bg-purple-600 hover:bg-purple-700 text-white" 
+                    ? "bg-purple-800 hover:bg-purple-900 text-white" 
                     : "bg-orange-500 hover:bg-orange-600 text-white"
                 }`}
               >
@@ -207,44 +283,91 @@ export default function HumorHistorico() {
                 key={index}
                 className={`p-6 rounded-2xl transition-all duration-300 ${
                   isDark 
-                  ? "bg-purple-800 hover:bg-purple-700" 
+                  ? "bg-purple-950 hover:bg-purple-800" 
                   : "bg-orange-100 hover:bg-orange-50"
                 }`}
               >
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-3xl">{humorEmojis[checkin.humor]}</span>
-                    <div>
-                      <h3 className={`font-bold text-lg ${
-                        isDark 
-                        ? "text-purple-50" 
-                        : "text-orange-800"
-                      }`}>
-                        {humorLabels[checkin.humor]}
-                      </h3>
-                      <p className={`text-sm ${
-                        isDark 
-                        ? "text-purple-300" 
-                        : "text-orange-600"
-                      }`}>
-                        {checkin.data}
-                      </p>
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <span className="text-3xl">{humorEmojis[checkin.humor]}</span>
+                      <div>
+                        <h3 className={`font-bold text-lg ${
+                          isDark 
+                          ? "text-purple-50" 
+                          : "text-orange-800"
+                        }`}>
+                          {humorLabels[checkin.humor]}
+                        </h3>
+                        <p className={`text-sm ${
+                          isDark 
+                          ? "text-purple-300" 
+                          : "text-orange-600"
+                        }`}>
+                          {checkin.data}
+                        </p>
+                      </div>
                     </div>
+                    
+                    {checkin.descricao && (
+                      <p className={`mt-2 ${
+                        isDark 
+                        ? "text-purple-100" 
+                        : "text-orange-700"
+                      }`}>
+                        {checkin.descricao}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="flex gap-2 flex-wrap">
+                    <button
+                      onClick={() => verDetalhes(checkin.timestamp)}
+                      className={`px-3 py-2 rounded-lg font-medium transition ${
+                        isDark 
+                        ? "bg-purple-700 text-purple-200 hover:bg-purple-600" 
+                        : "bg-orange-200 text-orange-700 hover:bg-orange-300"
+                      }`}
+                      title="Ver detalhes"
+                    >
+                      Ver detalhes
+                    </button>                  
+                    <button
+                      onClick={() => editarCheckin(checkin.timestamp)}
+                      className={`px-3 py-2 rounded-lg font-medium transition ${
+                        isDark 
+                        ? "bg-purple-600 text-purple-100 hover:bg-purple-500" 
+                        : "bg-orange-300 text-orange-800 hover:bg-orange-400"
+                      }`}
+                      title="Editar check-in"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => removerCheckin(checkin.timestamp)}
+                      className="bg-red-100 text-red-700 px-3 py-2 rounded-lg font-medium hover:bg-red-200 transition"
+                      title="Excluir check-in"
+                    >
+                      Excluir
+                    </button>
                   </div>
                 </div>
-                
-                {checkin.descricao && (
-                  <p className={`mt-2 ${
-                    isDark 
-                    ? "text-purple-200" 
-                    : "text-orange-700"
-                  }`}>
-                    {checkin.descricao}
-                  </p>
-                )}
               </div>
             ))
           )}
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link
+            to="/home" 
+            className={`font-medium ${
+              isDark 
+                ? "text-purple-200 hover:text-purple-100" 
+                : "text-orange-700 hover:text-orange-800"
+            }`}
+          >
+            ← Voltar para Home
+          </Link>
         </div>
       </div>
     </section>

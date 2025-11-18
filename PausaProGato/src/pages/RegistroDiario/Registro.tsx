@@ -141,7 +141,7 @@ const RegistroDiarioPage = () => {
       <section className={`w-full max-w-3xl rounded-2xl shadow-lg p-8 border ${
         isDark
           ? "bg-purple-950 border-purple-700"
-          : "bg-white border-orange-200"
+          : "bg-orange-50 border-orange-200"
       }`}>
         <h2 className={`text-[1.875rem] font-bold text-center mb-6 ${
           isDark 

@@ -16,7 +16,7 @@ const Cabecalho: React.FC = () => {
 
   const links: NavLink[] = [
     { to: "/home", label: "Home" },
-    { to: "/checkin", label: "Check-in de humor" },
+    { to: "/humor/checkin", label: "Check-in de humor" },
     { to: "/recursos", label: "Ajuda" },
     { to: "/faq", label: "FAQ" },
     { to: "/registro", label: "Registro Diário" },
@@ -34,11 +34,11 @@ const Cabecalho: React.FC = () => {
 
   return (
     <header
-      className={`shadow-md transition-colors duration-300 ${
+      className={
         isDark 
           ? "bg-purple-950 text-purple-100 shadow-lg" 
           : "bg-orange-400 text-orange-900 shadow-md"
-      }`}
+      }
     >
       <div className="w-full mx-auto flex justify-between items-center p-3">
         <div className="flex items-center gap-3">

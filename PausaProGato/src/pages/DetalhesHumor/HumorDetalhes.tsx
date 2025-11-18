@@ -87,7 +87,7 @@ export default function HumorDetalhes() {
       <div className="max-w-2xl mx-auto">
         <div className={`rounded-2xl p-8 ${
           isDark 
-          ? "bg-purple-800" 
+          ? "bg-purple-950" 
           : "bg-orange-100"
         }`}>
           
@@ -103,7 +103,7 @@ export default function HumorDetalhes() {
               onClick={() => navigate(-1)}
               className={`px-4 py-2 rounded-lg ${
                 isDark 
-                  ? "bg-purple-700 text-purple-200 hover:bg-purple-600"
+                  ? "bg-purple-800 text-purple-100 hover:bg-purple-600"
                   : "bg-orange-200 text-orange-700 hover:bg-orange-300"
               }`}
             >
@@ -156,7 +156,7 @@ export default function HumorDetalhes() {
                 to="/humor/checkin"
                 className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
                   isDark 
-                    ? "bg-purple-600 hover:bg-purple-700 text-purple-50" 
+                    ? "bg-purple-800 hover:bg-purple-700 text-purple-50" 
                     : "bg-orange-500 hover:bg-orange-600 text-orange-50"
                 }`}
               >
@@ -166,11 +166,11 @@ export default function HumorDetalhes() {
                 to="/humor/historico"
                 className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${
                   isDark 
-                    ? "bg-purple-700 hover:bg-purple-600 text-white border border-purple-500" 
+                    ? "bg-purple-800 hover:bg-purple-600 text-white border border-purple-500" 
                     : "bg-orange-200 hover:bg-orange-300 text-orange-700 border border-orange-300"
                 }`}
               >
-                Ver Histórico
+                Ver Meu Histórico
               </Link>
             </div>
           </div>

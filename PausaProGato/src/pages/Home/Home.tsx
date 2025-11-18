@@ -66,7 +66,7 @@ export default function Home() {
     {
       title: "Check-in de Humor",
       description: "Fale um pouco sobre seu dia",
-      path: "/checkin",
+      path: "/humor/checkin",
     },
     {
       title:"Histórico de Humor",
