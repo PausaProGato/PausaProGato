@@ -43,9 +43,13 @@ const Cabecalho: React.FC = () => {
       <div className="w-full mx-auto flex justify-between items-center p-3">
         <div className="flex items-center gap-3">
           <img
-            src="/logo.png"
+            src={
+              isDark
+              ? "/img/logoppgdark.png"
+              : "/img/logoppglight.png"
+            }
             alt="Logo PausaProGato"
-            className="h-10 cursor-pointer"
+            className="h-20 cursor-pointer"
             onClick={handleLogoClick}
           />
         </div>
