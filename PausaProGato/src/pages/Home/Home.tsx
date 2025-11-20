@@ -203,7 +203,7 @@ export default function Home() {
               </p>
               {user.username && (
                 <Link
-                  to="/checkin"
+                  to="/humor/checkin"
                   className={`inline-block mt-4 font-bold py-2 px-4 rounded-lg transition-all ${
                     isDark 
                     ? "bg-purple-600 text-purple-50 hover:bg-purple-700" 
