@@ -153,25 +153,25 @@ Siga os passos abaixo paar preparar o ambiente e rodar o projeto:
 - Aqui tem a página de check-in do humor onde o usuário compartilha como está o seu humor
 
 ![Ajuda](img/img5_1.png)
-![Ajuda](img/img5_2.png)
+![Ajuda 2](img/img5_2.png)
 - Aqui o usuário tem acesso a página de ajuda onde contém dicas de bem-estar, apoio emocional, materiais e outros
 
-![FAQ](img/img6_1)
-![FAQ](img/img6_2)
+![FAQ](img/img6_1.png)
+![FAQ](img/img6_2.png)
 - Aqui o usuário encontra perguntas frequentes sobre o site, check-in, dados e outros
 
-![Registro Diário](img/img7_1)
-![Registro Diário](img/img7_2)
-![Registro Diário](img/img7_3)
+![Registro Diário](img/img7_1.png)
+![Registro Diário](img/img7_2.png)
+![Registro Diário](img/img7_3.png)
 - Aqui o usuário encontra um formulário de registro diário, onde ele informa sobre seu humor, estresse, pausas e exercicios
 
-![Sobre](img/img8)
+![Sobre](img/img8.png)
 - Aqui o usuário encontra informações sobre o site
 
-![Contato](img/img9)
+![Contato](img/img9.png)
 - Aqui o usuário encontra um formulário para entrar em contato com a gente
 
-![Integrantes](img/img10)
+![Integrantes](img/img10.png)
 - Aqui o usuário encontra informações dos integrantes do grupo
 
 ## Autores e Créditos
