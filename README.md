@@ -1,5 +1,9 @@
 # PausaProGato
 
+## Descrição
+
+O PausaProGato nasceu com o propósito de trazer leveza, autocuidado e bem-estar para o dia a dia de quem vive a rotina intensa do trabalho.
+
 ## Sumário
 
 - [Endereço Organização](#endereço-organização)
@@ -22,18 +26,24 @@
 Endereço Organização GITHUB: https://github.com/PausaProGato
 
 ## Sobre o Projeto
-O PausaProGato nasceu com o propósito de trazer leveza, autocuidado e bem-estar para o dia a dia de quem vive a rotina intensa do trabalho. Inspirado na ideia de que pequenas pausas podem transformar o humor e a produtividade, a plataforma utiliza o carisma e a alegria dos gatinhos para incentivar momentos de relaxamento e atenção à saúde mental no ambiente profissional.
+ Inspirado na ideia de que pequenas pausas podem transformar o humor e a produtividade, a plataforma utiliza o carisma e a alegria dos gatinhos para incentivar momentos de relaxamento e atenção à saúde mental no ambiente profissional.
+
 A plataforma permite aos usuários:
-Realizar check-in emocional:
-Os colaboradores registram diariamente seu estado emocional, criando um histórico pessoal de humor e saúde mental.
-Registrar o humor do dia:
-Cada usuário pode sinalizar como está se sentindo, facilitando o autoconhecimento e a identificação de padrões de bem-estar e possíveis sinais de cansaço, ansiedade ou estresse.
-Acessar recursos de apoio:
-São disponibilizadas dicas, mensagens de acolhimento e sugestões de autocuidado, principalmente para quem está enfrentando momentos difíceis durante o expediente ou fora dele.
-Promover a cultura da pausa saudável:
-O sistema incentiva pausas curtas e conscientes ao longo do dia, mostrando que interromper a rotina para cuidar da mente é fundamental para a produtividade e para o clima organizacional.
-Valorizar o autocuidado com leveza:
-O projeto reforça, diariamente, que cuidar de si é essencial—e transformar esse momento em algo lúdico e gentil faz toda diferença.
+- Realizar check-in emocional:
+  - Os colaboradores registram diariamente seu estado emocional, criando um histórico pessoal de humor e saúde mental.
+
+- Registrar o humor do dia:
+  - Cada usuário pode sinalizar como está se sentindo, facilitando o autoconhecimento e a identificação de padrões de bem-estar e possíveis sinais de cansaço, ansiedade ou estresse.
+
+- Acessar recursos de apoio:
+  - São disponibilizadas dicas, mensagens de acolhimento e sugestões de autocuidado, principalmente para quem está enfrentando momentos difíceis durante o expediente ou fora dele.
+
+- Promover a cultura da pausa saudável:
+  - O sistema incentiva pausas curtas e conscientes ao longo do dia, mostrando que interromper a rotina para cuidar da mente é fundamental para a produtividade e para o clima organizacional.
+
+- Valorizar o autocuidado com leveza:
+  - O projeto reforça, diariamente, que cuidar de si é essencial e transformar esse momento em algo lúdico e gentil faz toda diferença.
+  
 Mais do que uma ferramenta, o PausaProGato é um convite à coragem de pausar, sendo uma verdadeira fonte de apoio ao bem-estar e à saúde mental de equipes e indivíduos. Seu desenvolvimento foi inspirado em pesquisas atuais sobre saúde emocional no trabalho e nas melhores práticas de acolhimento, promovendo um espaço digital seguro, amigável e acolhedor para todos.
 
 ## Status do Projeto
