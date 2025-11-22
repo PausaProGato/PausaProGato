@@ -2,25 +2,54 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/theme-provider";
 
-type RegistroDiario = {
+type Usuario = {
   id?: number;
-  data: string;
   nome: string;
   email: string;
   departamento: string;
   cargo: string;
-  nivelHumor: string;
-  descricaoHumor: string;
-  nivelEstresse: string;
-  descricaoEstresse: string;
-  qualidadeSono: string;
+}
+
+type Humor = {
+  nivel: string;
+  descricao: string;
+}
+
+type NivelEstresse = {
+  nivel: string;
+  descricao: string;
+}
+
+type QualidadeSono = {
+  qualidade: string;
   horasDuracao: string;
-  observacoesSono: string;
-  quantidadePausas: string;
-  duracaoMediaPausas: string;
-  quantidadeExercicios: string;
-  tiposExercicios: string;
-  observacoesGerais: string;
+  observacoes: string;
+}
+
+type Pausas = {
+  quantidade: string;
+  duracaoMedia: string;
+}
+
+type Observacoes = {
+  texto: string;
+}
+
+type ExerciciosFeitos = {
+  quantidade: string;
+  tipos: string;
+}
+
+type RegistroDiario = {
+  id?: number;
+  data: string;
+  usuario: Usuario;
+  humor: Humor;
+  nivelEstresse: NivelEstresse;
+  qualidadeSono: QualidadeSono;
+  pausas: Pausas;
+  observacoes: Observacoes;
+  exerciciosFeitos: ExerciciosFeitos;
 }
 
 const RegistroDiarioPage = () => {
@@ -32,22 +61,37 @@ const RegistroDiarioPage = () => {
   const [registro, setRegistro] = useState<RegistroDiario>({
     id: registroEdicao?.id ?? undefined,
     data: registroEdicao?.data ?? new Date().toISOString().split('T')[0],
-    nome: registroEdicao?.nome ?? "",
-    email: registroEdicao?.email ?? "",
-    departamento: registroEdicao?.departamento ?? "",
-    cargo: registroEdicao?.cargo ?? "",
-    nivelHumor: registroEdicao?.nivelHumor ?? "",
-    descricaoHumor: registroEdicao?.descricaoHumor ?? "",
-    nivelEstresse: registroEdicao?.nivelEstresse ?? "",
-    descricaoEstresse: registroEdicao?.descricaoEstresse ?? "",
-    qualidadeSono: registroEdicao?.qualidadeSono ?? "",
-    horasDuracao: registroEdicao?.horasDuracao ?? "",
-    observacoesSono: registroEdicao?.observacoesSono ?? "",
-    quantidadePausas: registroEdicao?.quantidadePausas ?? "",
-    duracaoMediaPausas: registroEdicao?.duracaoMediaPausas ?? "",
-    quantidadeExercicios: registroEdicao?.quantidadeExercicios ?? "",
-    tiposExercicios: registroEdicao?.tiposExercicios ?? "",
-    observacoesGerais: registroEdicao?.observacoesGerais ?? "",
+    usuario: {
+      id: registroEdicao?.usuario?.id ?? undefined,
+      nome: registroEdicao?.usuario?.nome ?? "",
+      email: registroEdicao?.usuario?.email ?? "",
+      departamento: registroEdicao?.usuario?.departamento ?? "",
+      cargo: registroEdicao?.usuario?.cargo ?? "",
+    },
+    humor: {
+      nivel: registroEdicao?.humor?.nivel ?? "",
+      descricao: registroEdicao?.humor?.descricao ?? "",
+    },
+    nivelEstresse: {
+      nivel: registroEdicao?.nivelEstresse?.nivel ?? "",
+      descricao: registroEdicao?.nivelEstresse?.descricao ?? "",
+    },
+    qualidadeSono: {
+      qualidade: registroEdicao?.qualidadeSono?.qualidade ?? "",
+      horasDuracao: registroEdicao?.qualidadeSono?.horasDuracao ?? "",
+      observacoes: registroEdicao?.qualidadeSono?.observacoes ?? "",
+    },
+    pausas: {
+      quantidade: registroEdicao?.pausas?.quantidade ?? "",
+      duracaoMedia: registroEdicao?.pausas?.duracaoMedia ?? "",
+    },
+    observacoes: {
+      texto: registroEdicao?.observacoes?.texto ?? "",
+    },
+    exerciciosFeitos: {
+      quantidade: registroEdicao?.exerciciosFeitos?.quantidade ?? "",
+      tipos: registroEdicao?.exerciciosFeitos?.tipos ?? "",
+    },
   });
 
   const [mensagemSucesso, setMensagemSucesso] = useState("");
@@ -58,15 +102,29 @@ const RegistroDiarioPage = () => {
     }
   }, [registroEdicao]);
 
-  const API_URL = "esperandorender";
+  const API_URL = "https://pausa-pro-gato.onrender.com";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { id, value, type } = e.target;
     
-    setRegistro({
-      ...registro,
-      [id]: type === "number" ? (value === "" ? 0 : Number(value)) : value, 
-    });
+    // Se o campo pertence a um sub-objeto (ex: usuario.nome)
+    if (id.includes('.')) {
+      const [parent, child] = id.split('.');
+      
+      setRegistro(prev => ({
+        ...prev,
+        [parent]: {
+          ...prev[parent as keyof RegistroDiario],
+          [child]: type === "number" ? (value === "" ? 0 : Number(value)) : value
+        }
+      }));
+    } else {
+      // Campos do objeto principal (como data)
+      setRegistro(prev => ({
+        ...prev,
+        [id]: type === "number" ? (value === "" ? 0 : Number(value)) : value
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -84,8 +142,8 @@ const RegistroDiarioPage = () => {
       
       if (response.ok) {
         const mensagem = registro.id ? 
-          `Registro Diário de ${registro.nome} atualizado com sucesso!` : 
-          `Registro Diário de ${registro.nome} cadastrado com sucesso!`;
+          `Registro Diário de ${registro.usuario.nome} atualizado com sucesso!` : 
+          `Registro Diário de ${registro.usuario.nome} cadastrado com sucesso!`;
         
         setMensagemSucesso(mensagem);
         
@@ -152,6 +210,44 @@ const RegistroDiarioPage = () => {
         </h2>
 
         <form className="space-y-6" onSubmit={handleSubmit}>
+          {/* Data */}
+          <fieldset className={`border rounded-lg p-4 ${
+            isDark
+              ? "border-purple-700"
+              : "border-orange-300 bg-orange-50"
+          }`}>
+            <legend className={`text-[1.125rem] font-semibold px-2 ${
+              isDark 
+              ? "text-purple-300" 
+              : "text-orange-700"
+            }`}>
+              Data do Registro
+            </legend>
+            
+            <div>
+              <label htmlFor="data" className={`block mt-2 font-medium ${
+                isDark 
+                ? "text-purple-200" 
+                : "text-orange-800"
+              }`}>
+                Data:
+              </label>
+              <input
+                type="date"
+                id="data"
+                onChange={handleChange}
+                value={registro.data}
+                required
+                className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 ${
+                  isDark
+                    ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
+                    : "border-orange-300 focus:ring-orange-500 bg-white text-gray-900"
+                }`}
+              />
+            </div>
+          </fieldset>
+
+          {/* Usuário */}
           <fieldset className={`border rounded-lg p-4 ${
             isDark
               ? "border-purple-700"
@@ -167,7 +263,7 @@ const RegistroDiarioPage = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="nome" className={`block mt-2 font-medium ${
+                <label htmlFor="usuario.nome" className={`block mt-2 font-medium ${
                   isDark 
                   ? "text-purple-200" 
                   : "text-orange-800"
@@ -176,9 +272,9 @@ const RegistroDiarioPage = () => {
                 </label>
                 <input
                   type="text"
-                  id="nome"
+                  id="usuario.nome"
                   onChange={handleChange}
-                  value={registro.nome}
+                  value={registro.usuario.nome}
                   required
                   className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 ${
                     isDark
@@ -189,7 +285,7 @@ const RegistroDiarioPage = () => {
               </div>
 
               <div>
-                <label htmlFor="email" className={`block mt-2 font-medium ${
+                <label htmlFor="usuario.email" className={`block mt-2 font-medium ${
                   isDark 
                   ? "text-purple-200" 
                   : "text-orange-800"
@@ -198,9 +294,9 @@ const RegistroDiarioPage = () => {
                 </label>
                 <input
                   type="email"
-                  id="email"
+                  id="usuario.email"
                   onChange={handleChange}
-                  value={registro.email}
+                  value={registro.usuario.email}
                   required
                   className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                     isDark
@@ -211,7 +307,7 @@ const RegistroDiarioPage = () => {
               </div>
 
               <div>
-                <label htmlFor="departamento" className={`block mt-2 font-medium ${
+                <label htmlFor="usuario.departamento" className={`block mt-2 font-medium ${
                   isDark 
                   ? "text-purple-200" 
                   : "text-orange-800"
@@ -220,9 +316,9 @@ const RegistroDiarioPage = () => {
                 </label>
                 <input
                   type="text"
-                  id="departamento"
+                  id="usuario.departamento"
                   onChange={handleChange}
-                  value={registro.departamento}
+                  value={registro.usuario.departamento}
                   required
                   className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                     isDark
@@ -233,7 +329,7 @@ const RegistroDiarioPage = () => {
               </div>
 
               <div>
-                <label htmlFor="cargo" className={`block mt-2 font-medium ${
+                <label htmlFor="usuario.cargo" className={`block mt-2 font-medium ${
                   isDark 
                   ? "text-purple-200" 
                   : "text-orange-800"
@@ -242,9 +338,9 @@ const RegistroDiarioPage = () => {
                 </label>
                 <input
                   type="text"
-                  id="cargo"
+                  id="usuario.cargo"
                   onChange={handleChange}
-                  value={registro.cargo}
+                  value={registro.usuario.cargo}
                   required
                   className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                     isDark
@@ -271,7 +367,7 @@ const RegistroDiarioPage = () => {
             </legend>
             
             <div>
-              <label htmlFor="nivelHumor" className={`block mt-2 font-medium ${
+              <label htmlFor="humor.nivel" className={`block mt-2 font-medium ${
                 isDark 
                 ? "text-purple-200" 
                 : "text-orange-800"
@@ -279,9 +375,9 @@ const RegistroDiarioPage = () => {
                 Nível de Humor:
               </label>
               <select
-                id="nivelHumor"
+                id="humor.nivel"
                 onChange={handleChange}
-                value={registro.nivelHumor}
+                value={registro.humor.nivel}
                 className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                   isDark
                     ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
@@ -296,7 +392,7 @@ const RegistroDiarioPage = () => {
               </select>
             </div>
             <div>
-              <label htmlFor="descricaoHumor" className={`block mt-4 font-medium ${
+              <label htmlFor="humor.descricao" className={`block mt-4 font-medium ${
                 isDark 
                 ? "text-purple-200" 
                 : "text-orange-800"
@@ -304,9 +400,9 @@ const RegistroDiarioPage = () => {
                 Descrição do Humor:
               </label>
               <textarea
-                id="descricaoHumor"
+                id="humor.descricao"
                 onChange={handleChange}
-                value={registro.descricaoHumor}
+                value={registro.humor.descricao}
                 className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                   isDark
                     ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
@@ -332,7 +428,7 @@ const RegistroDiarioPage = () => {
             </legend>
             
             <div>
-              <label htmlFor="nivelEstresse" className={`block mt-2 font-medium ${
+              <label htmlFor="nivelEstresse.nivel" className={`block mt-2 font-medium ${
                 isDark 
                 ? "text-purple-200" 
                 : "text-orange-800"
@@ -340,9 +436,9 @@ const RegistroDiarioPage = () => {
                 Nível de Estresse:
               </label>
               <select
-                id="nivelEstresse"
+                id="nivelEstresse.nivel"
                 onChange={handleChange}
-                value={registro.nivelEstresse}
+                value={registro.nivelEstresse.nivel}
                 className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                   isDark
                     ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
@@ -358,7 +454,7 @@ const RegistroDiarioPage = () => {
             </div>
 
             <div>
-              <label htmlFor="descricaoEstresse" className={`block mt-4 font-medium ${
+              <label htmlFor="nivelEstresse.descricao" className={`block mt-4 font-medium ${
                 isDark 
                 ? "text-purple-200" 
                 : "text-orange-800"
@@ -366,9 +462,9 @@ const RegistroDiarioPage = () => {
                 Descrição do Estresse:
               </label>
               <textarea
-                id="descricaoEstresse"
+                id="nivelEstresse.descricao"
                 onChange={handleChange}
-                value={registro.descricaoEstresse}
+                value={registro.nivelEstresse.descricao}
                 className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                   isDark
                     ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
@@ -395,7 +491,7 @@ const RegistroDiarioPage = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="qualidadeSono" className={`block mt-2 font-medium ${
+                <label htmlFor="qualidadeSono.qualidade" className={`block mt-2 font-medium ${
                   isDark 
                   ? "text-purple-200" 
                   : "text-orange-800"
@@ -403,9 +499,9 @@ const RegistroDiarioPage = () => {
                   Qualidade do Sono:
                 </label>
                 <select
-                  id="qualidadeSono"
+                  id="qualidadeSono.qualidade"
                   onChange={handleChange}
-                  value={registro.qualidadeSono}
+                  value={registro.qualidadeSono.qualidade}
                   className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                     isDark
                       ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
@@ -422,16 +518,16 @@ const RegistroDiarioPage = () => {
               </div>
 
               <div>
-                <label htmlFor="horasDuracao" className={`block mt-2 font-medium ${
+                <label htmlFor="qualidadeSono.horasDuracao" className={`block mt-2 font-medium ${
                   isDark ? "text-purple-200" : "text-orange-800"
                 }`}>
                   Horas de Duração:
                 </label>
                 <input
                   type="text"
-                  id="horasDuracao"
+                  id="qualidadeSono.horasDuracao"
                   onChange={handleChange}
-                  value={registro.horasDuracao}
+                  value={registro.qualidadeSono.horasDuracao}
                   placeholder="ex: 7h30min"
                   className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                     isDark
@@ -443,7 +539,7 @@ const RegistroDiarioPage = () => {
             </div>
 
             <div>
-              <label htmlFor="observacoesSono" className={`block mt-4 font-medium ${
+              <label htmlFor="qualidadeSono.observacoes" className={`block mt-4 font-medium ${
                 isDark 
                 ? "text-purple-200" 
                 : "text-orange-800"
@@ -451,9 +547,9 @@ const RegistroDiarioPage = () => {
                 Observações do Sono:
               </label>
               <textarea
-                id="observacoesSono"
+                id="qualidadeSono.observacoes"
                 onChange={handleChange}
-                value={registro.observacoesSono}
+                value={registro.qualidadeSono.observacoes}
                 className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                   isDark
                     ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
@@ -480,7 +576,7 @@ const RegistroDiarioPage = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="quantidadePausas" className={`block mt-2 font-medium ${
+                <label htmlFor="pausas.quantidade" className={`block mt-2 font-medium ${
                   isDark 
                   ? "text-purple-200" 
                   : "text-orange-800"
@@ -489,9 +585,9 @@ const RegistroDiarioPage = () => {
                 </label>
                 <input
                   type="text"
-                  id="quantidadePausas"
+                  id="pausas.quantidade"
                   onChange={handleChange}
-                  value={registro.quantidadePausas}
+                  value={registro.pausas.quantidade}
                   className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                     isDark
                       ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
@@ -501,7 +597,7 @@ const RegistroDiarioPage = () => {
               </div>
 
               <div>
-                <label htmlFor="duracaoMediaPausas" className={`block mt-2 font-medium ${
+                <label htmlFor="pausas.duracaoMedia" className={`block mt-2 font-medium ${
                   isDark 
                   ? "text-purple-200" 
                   : "text-orange-800"
@@ -510,9 +606,9 @@ const RegistroDiarioPage = () => {
                 </label>
                 <input
                   type="text"
-                  id="duracaoMediaPausas"
+                  id="pausas.duracaoMedia"
                   onChange={handleChange}
-                  value={registro.duracaoMediaPausas}
+                  value={registro.pausas.duracaoMedia}
                   placeholder="ex: 15min"
                   className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                     isDark
@@ -540,7 +636,7 @@ const RegistroDiarioPage = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="quantidadeExercicios" className={`block mt-2 font-medium ${
+                <label htmlFor="exerciciosFeitos.quantidade" className={`block mt-2 font-medium ${
                   isDark 
                   ? "text-purple-200" 
                   : "text-orange-800"
@@ -549,9 +645,9 @@ const RegistroDiarioPage = () => {
                 </label>
                 <input
                   type="text"
-                  id="quantidadeExercicios"
+                  id="exerciciosFeitos.quantidade"
                   onChange={handleChange}
-                  value={registro.quantidadeExercicios}
+                  value={registro.exerciciosFeitos.quantidade}
                   className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                     isDark
                       ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
@@ -561,7 +657,7 @@ const RegistroDiarioPage = () => {
               </div>
 
               <div>
-                <label htmlFor="tiposExercicios" className={`block mt-2 font-medium ${
+                <label htmlFor="exerciciosFeitos.tipos" className={`block mt-2 font-medium ${
                   isDark 
                   ? "text-purple-200" 
                   : "text-orange-800"
@@ -570,9 +666,9 @@ const RegistroDiarioPage = () => {
                 </label>
                 <input
                   type="text"
-                  id="tiposExercicios"
+                  id="exerciciosFeitos.tipos"
                   onChange={handleChange}
-                  value={registro.tiposExercicios}
+                  value={registro.exerciciosFeitos.tipos}
                   placeholder="ex: Caminhada, Yoga"
                   className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                     isDark
@@ -599,7 +695,7 @@ const RegistroDiarioPage = () => {
             </legend>
             
             <div>
-              <label htmlFor="observacoesGerais" className={`block mt-2 font-medium ${
+              <label htmlFor="observacoes.texto" className={`block mt-2 font-medium ${
                 isDark 
                 ? "text-purple-200" 
                 : "text-orange-800"
@@ -607,9 +703,9 @@ const RegistroDiarioPage = () => {
                 Observações:
               </label>
               <textarea
-                id="observacoesGerais"
+                id="observacoes.texto"
                 onChange={handleChange}
-                value={registro.observacoesGerais}
+                value={registro.observacoes.texto}
                 className={`w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:border-orange-500 dark:focus:border-purple-500 ${
                   isDark
                     ? "border-purple-600 focus:ring-purple-500 bg-purple-800 text-white"
