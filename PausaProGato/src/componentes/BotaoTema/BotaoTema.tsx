@@ -12,8 +12,8 @@ export default function BotaoTema() {
         : "Mudar para tema escuro"}
     >
       {isDark
-       ? '🐈' 
-       : '🐈‍⬛'
+       ? '🐈‍⬛'
+       : '🐈' 
        }
     </button>
   );

@@ -60,8 +60,8 @@ function Integrantes() {
             key={index}
             className={`rounded-2xl shadow-xl p-8 flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
               isDark 
-                ? "bg-purple-950 border border-purple-700 hover:border-purple-400" 
-                : "bg-orange-50 border border-orange-200 hover:border-orange-300"
+                ? "bg-purple-950 border-2 border-purple-700 hover:border-purple-400" 
+                : "bg-orange-50 border-2 border-orange-200 hover:border-orange-300"
             }`}
           >
             <img

@@ -26,8 +26,8 @@ export default function Contato() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (form.mensagem.trim().length < 10) {
-      alert("Por favor, escreva uma mensagem com pelo menos 10 caracteres.");
+    if (form.mensagem.trim().length < 15) {
+      alert("Por favor, escreva uma mensagem com pelo menos 15 caracteres.");
       return;
     }
     

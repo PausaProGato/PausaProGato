@@ -59,13 +59,13 @@ export default function Home() {
 
   const navigationCards = [
     {
-      title: "Recursos/Ajuda",
+      title: "Ajuda",
       description: "Veja nossa página de recursos e ajuda",
       path: "/recursos",
     },
     {
       title: "Check-in de Humor",
-      description: "Fale um pouco sobre seu dia",
+      description: "Compartilhe um pouco sobre como foi seu dia",
       path: "/humor/checkin",
     },
     {
@@ -80,7 +80,7 @@ export default function Home() {
     },
     {
       title: "Sobre",
-      description: "Conheça o PausaProGato e nossa missão",
+      description: "Conheça o PausaProGato e a nossa missão",
       path: "/sobre",
     }
   ];
@@ -114,7 +114,7 @@ export default function Home() {
             <img
               src={`/img/${user.avatar.replace(/\s+/g, '').toLowerCase()}.png`}
               alt={user.avatar}
-              className={`w-34 h-34 rounded-full shadow-lg p-1 transition-all duration-300 ${
+              className={`w-32 h-32 rounded-full shadow-lg p-1 transition-all duration-300 ${
                 isDark
                   ? "ring-4 ring-purple-600 hover:ring-purple-400"
                   : "ring-4 ring-orange-600 hover:ring-orange-400"

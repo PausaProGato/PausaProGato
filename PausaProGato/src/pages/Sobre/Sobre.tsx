@@ -54,7 +54,7 @@ function Sobre() {
             ? "text-purple-100" 
             : "text-orange-800"}
           >
-            check-in emocional
+            Check-in Emocional
           </strong>,
           registrem seu humor do dia e acessem{" "}
           <strong className={
@@ -62,7 +62,7 @@ function Sobre() {
             ? "text-purple-100" 
             : "text-orange-800"}
           >
-            recursos de apoio
+            Recursos de apoio
           </strong> para momentos
           de cansaço, ansiedade ou estresse. É um espaço gentil para cuidar da mente,
           inspirado em pesquisas sobre saúde mental no ambiente de trabalho.

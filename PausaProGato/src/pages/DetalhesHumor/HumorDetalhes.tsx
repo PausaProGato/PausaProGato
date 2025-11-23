@@ -160,7 +160,7 @@ export default function HumorDetalhes() {
                     : "bg-orange-500 hover:bg-orange-600 text-orange-50"
                 }`}
               >
-                Novo Check-in
+                + Novo Check-in
               </Link>
               <Link
                 to="/humor/historico"

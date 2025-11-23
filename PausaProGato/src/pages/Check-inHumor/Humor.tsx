@@ -199,7 +199,7 @@ export default function HumorCheckin() {
               ? "text-purple-100" 
               : "text-orange-700"
             }`}>
-              Quer compartilhar mais sobre seu dia?
+              Gostaria de compartilhar mais sobre seu dia?
               <span className="text-xs ml-1 opacity-70">(opcional)</span>
             </label>
             <textarea

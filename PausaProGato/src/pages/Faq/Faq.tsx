@@ -33,7 +33,7 @@ export default function FAQ() {
     },
     {
       question: "Posso usar o site no celular?",
-      answer: "Com certeza! O PausaProGato é totalmente responsivo e funciona perfeitamente em smartphones, tablets e computadores."
+      answer: "Com certeza! O PausaProGato é totalmente responsivo e funciona em smartphones, tablets e computadores."
     },
     {
       question: "O site é gratuito?",

@@ -156,7 +156,7 @@ export default function HumorHistorico() {
           </div>
 
           <div className="flex justify-center space-x-4">
-            {["hoje", "semana", "mes", "todos"].map((p) => (
+            {["todos", "hoje", "semana", "mes"].map((p) => (
               <Link
                 key={p}
                 to={`/humor/historico/${p}`}

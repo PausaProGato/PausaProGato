@@ -9,7 +9,7 @@ const avatarImages: Record<AvatarKey, string> = {
   "Gato Rajado": "/img/gatorajado.png",
   "Gato Branco": "/img/gatobranco.png",
   "Gato Branco Sapo": "/img/gatobrancosapo.png",
-  "Gato Rajado Sapo": "/img/gatosapo.png",
+  "Gato Rajado Sapo": "/img/gatosapo.png"
 };
 
 export default function LoginPage() {

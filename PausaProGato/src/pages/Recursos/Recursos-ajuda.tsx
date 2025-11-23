@@ -35,7 +35,7 @@ export default function RecursosAjuda() {
             : "text-orange-600"
           }`}>
             Lembre-se: pedir ajuda é um ato de coragem.  
-            Aqui estão alguns recursos que podem apoiar seu bem-estar emocional.
+            Aqui estão alguns recursos que podem ajudar seu bem-estar emocional.
           </p>
         </div>
 
@@ -104,6 +104,11 @@ export default function RecursosAjuda() {
             ? "text-purple-100" 
             : "text-orange-700"
           }`}>
+            <span className={isDark 
+              ? "text-purple-300" 
+              : "text-orange-500"}>
+              🐾
+            </span>
             Apoio Emocional & Emergências
           </h2>
           <p className={`mb-4 ${
@@ -187,6 +192,11 @@ export default function RecursosAjuda() {
             ? "text-purple-100" 
             : "text-orange-700"
           }`}>
+            <span className={isDark 
+              ? "text-purple-300" 
+              : "text-orange-500"}>
+              🐾
+            </span>
             Materiais & Apoio Online
           </h2>
           <ul className={`space-y-3 ${

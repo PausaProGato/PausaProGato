@@ -309,7 +309,7 @@ const RegistroDiarioPage = () => {
               ? "text-purple-300" 
               : "text-orange-700"
             }`}>
-              Data do Registro
+              Data de Realização do Registro 
             </legend>
             
             <div>
@@ -512,7 +512,7 @@ const RegistroDiarioPage = () => {
               ? "text-purple-300" 
               : "text-orange-700"
             }`}>
-              Nível de Estresse
+              Estresse
             </legend>
             
             <div>
@@ -800,7 +800,7 @@ const RegistroDiarioPage = () => {
                     : "border-orange-300 focus:ring-orange-500 bg-white text-gray-900"
                 }`}
                 rows={4}
-                placeholder="Digite aqui quaisquer observações adicionais..."
+                placeholder="Digite aqui quaisquer observações adicionais que desejar..."
               />
             </div>
           </fieldset>
