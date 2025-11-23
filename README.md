@@ -48,7 +48,7 @@ Mais do que uma ferramenta, o PausaProGato é um convite à coragem de pausar, s
 
 ## Status do Projeto
 
-Ativo/Em Desenvolvimento
+- Completo
 
 ## Tecnologias Utilizadas
 
@@ -97,6 +97,8 @@ Siga os passos abaixo paar preparar o ambiente e rodar o projeto:
         public/
             img/
               imagens em png e jpeg
+            img_README
+              imagens em png
             src/
                 componentes/
                     BotaoTema/
@@ -147,41 +149,56 @@ Siga os passos abaixo paar preparar o ambiente e rodar o projeto:
 
 ## Endpoints
 
+    <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/integrantes" element={<Integrantes />} />
+        <Route path="/sobre" element={<Sobre />} />
+        <Route path="/humor/checkin" element={<Humor />} />
+        <Route path="/humor/checkin/:timestamp" element={<Humor />} />
+        <Route path="/humor/detalhes/:timestamp" element={<HumorDetalhes />} />
+        <Route path="/humor/historico" element={<HumorHistorico />} />
+        <Route path="/humor/historico/:periodo" element={<HumorHistorico />} />
+        <Route path="/registro" element={<RegistroDiarioPage />} />
+        <Route path="/recursos" element={<RecursosAjuda />} />
+        <Route path="/contato" element={<Contato />} />
+      </Routes>
 
 ## Screenshots
 
-![Tela de Login](img/image.png)
+![Tela de Login](PausaProGato/public/img_README/image.png)
 - Aqui o usuário faz o login
 
-![Tela de Boas Vindas](img/img2.png)
+![Tela de Boas Vindas](PausaProGato/public/img_README/img2.png)
 - Aqui o usuário vê uma mensagem de boas vindas antes de entrar no site
 
-![Tela Home](img/img3.png)
+![Tela Home](PausaProGato/public/img_README/img3.png)
 - Aqui o usuário tem acesso a todas as funcionalidades do site e ao histórico de humor
 
-![Tela Check-in de Humor](img/img4.png)
+![Tela Check-in de Humor](PausaProGato/public/img_README/img4.png)
 - Aqui tem a página de check-in do humor onde o usuário compartilha como está o seu humor
 
-![Ajuda](img/img5_1.png)
-![Ajuda 2](img/img5_2.png)
+![Ajuda](PausaProGato/public/img_README/img5_1.png)
+![Ajuda 2](PausaProGato/public/img_README/img5_2.png)
 - Aqui o usuário tem acesso a página de ajuda onde contém dicas de bem-estar, apoio emocional, materiais e outros
 
-![FAQ](img/img6_1.png)
-![FAQ](img/img6_2.png)
+![FAQ](PausaProGato/public/img_README/img6_1.png)
+![FAQ](PausaProGato/public/img_README/img6_2.png)
 - Aqui o usuário encontra perguntas frequentes sobre o site, check-in, dados e outros
 
-![Registro Diário](img/img7_1.png)
-![Registro Diário](img/img7_2.png)
-![Registro Diário](img/img7_3.png)
+![Registro Diário](PausaProGato/public/img_README/img7_1.png)
+![Registro Diário](PausaProGato/public/img_README/img7_2.png)
+![Registro Diário](PausaProGato/public/img_README/img7_3.png)
 - Aqui o usuário encontra um formulário de registro diário, onde ele informa sobre seu humor, estresse, pausas e exercicios
 
-![Sobre](img/img8.png)
+![Sobre](PausaProGato/public/img_README/img8.png)
 - Aqui o usuário encontra informações sobre o site
 
-![Contato](img/img9.png)
+![Contato](PausaProGato/public/img_README/img9.png)
 - Aqui o usuário encontra um formulário para entrar em contato com a gente
 
-![Integrantes](img/img10.png)
+![Integrantes](PausaProGato/public/img_README/img10.png)
 - Aqui o usuário encontra informações dos integrantes do grupo
 
 ## Autores e Créditos
@@ -208,11 +225,11 @@ Endereço GITHUB: https://github.com/PausaProGato/PausaProGato.git
 
 ## Enderço do projeto na Vercel
 
-Link: 
+Link: https://pausa-pro-gato.vercel.app
 
 ## Link do Vídeo no Youtube
 
-Link: 
+Link: https://youtu.be/O5xAAWQzjmc?si=f-Q_XmGDs15Gh2X_
 
 ## Formatação arquivo MARKDOWN (*.MD)
 https://support.zendesk.com/hc/pt-br/articles/4408846544922-Formata%C3%A7%C3%A3o-de-texto-com-Markdown?page=1&sort_by=created_at&sort_order=desc   
