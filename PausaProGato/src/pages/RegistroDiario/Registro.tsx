@@ -102,65 +102,153 @@ const RegistroDiarioPage = () => {
     }
   }, [registroEdicao]);
 
-  const API_URL = "https://pausa-pro-gato.onrender.com";
+  const API_URL = "https://pausa-pro-gato-z7i8.onrender.com/registros";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { id, value, type } = e.target;
-    
-    // Se o campo pertence a um sub-objeto (ex: usuario.nome)
+    const { id, value } = e.target;
+
     if (id.includes('.')) {
-      const [parent, child] = id.split('.');
-      
-      setRegistro(prev => ({
-        ...prev,
-        [parent]: {
-          ...prev[parent as keyof RegistroDiario],
-          [child]: type === "number" ? (value === "" ? 0 : Number(value)) : value
-        }
-      }));
+        const [parent, child] = id.split('.');
+        
+        setRegistro(prev => {
+            const updatedRegistro = { ...prev };
+
+            switch (parent) {
+                case 'usuario':
+                    updatedRegistro.usuario = { ...prev.usuario, [child]: value };
+                    break;
+                case 'humor':
+                    updatedRegistro.humor = { ...prev.humor, [child]: value };
+                    break;
+                case 'nivelEstresse':
+                    updatedRegistro.nivelEstresse = { ...prev.nivelEstresse, [child]: value };
+                    break;
+                case 'qualidadeSono':
+                    updatedRegistro.qualidadeSono = { ...prev.qualidadeSono, [child]: value };
+                    break;
+                case 'pausas':
+                    updatedRegistro.pausas = { ...prev.pausas, [child]: value };
+                    break;
+                case 'observacoes':
+                    updatedRegistro.observacoes = { ...prev.observacoes, [child]: value };
+                    break;
+                case 'exerciciosFeitos':
+                    updatedRegistro.exerciciosFeitos = { ...prev.exerciciosFeitos, [child]: value };
+                    break;
+                default:
+                    console.warn(`Campo pai desconhecido: ${parent}`);
+            }
+            
+            return updatedRegistro;
+        });
     } else {
-      // Campos do objeto principal (como data)
-      setRegistro(prev => ({
-        ...prev,
-        [id]: type === "number" ? (value === "" ? 0 : Number(value)) : value
-      }));
+        setRegistro(prev => ({
+            ...prev,
+            [id]: value
+        }));
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const url = registro.id ? `${API_URL}/${registro.id}` : API_URL;
-    const method = registro.id ? "PUT" : "POST";
-    
-    try {
-      const response = await fetch(url, {
-        method: method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(registro),
-      });
-      
-      if (response.ok) {
-        const mensagem = registro.id ? 
-          `Registro Diário de ${registro.usuario.nome} atualizado com sucesso!` : 
-          `Registro Diário de ${registro.usuario.nome} cadastrado com sucesso!`;
-        
-        setMensagemSucesso(mensagem);
-        
-        setTimeout(() => {
-          setMensagemSucesso("");
-          navigate("/home");
-        }, 3000);
-        
-      } else {
-        const erro = await response.text();
-        alert(`Erro ao ${registro.id ? "atualizar" : "cadastrar"} registro: ${erro}`);
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Erro de conexão com o servidor!");
+  e.preventDefault();
+  
+  if (!registro.usuario.nome || !registro.usuario.email || !registro.data) {
+    alert("Por favor, preencha pelo menos nome, email e data.");
+    return;
+  }
+
+  const url = registro.id ? `${API_URL}/${registro.id}` : API_URL;
+  const method = registro.id ? "PUT" : "POST";
+
+  const dataHoje = new Date().toISOString().split("T")[0];
+
+  const dadosParaEnviar = {
+    id: registro.id,
+    data: registro.data,
+
+    usuario: registro.usuario,
+
+    humor: {
+      ...registro.humor,
+      data: dataHoje
+    },
+
+    nivelEstresse: {
+      ...registro.nivelEstresse,
+      data: dataHoje
+    },
+
+    qualidadeSono: {
+      qualidade: registro.qualidadeSono.qualidade,
+      horas_duracao: registro.qualidadeSono.horasDuracao,
+      observacoes: registro.qualidadeSono.observacoes,
+      data: dataHoje
+    },
+
+    pausas: {
+      quantidade_pausas: registro.pausas.quantidade,
+      duracao_media: registro.pausas.duracaoMedia,
+      data: dataHoje
+    },
+
+    observacoes: {
+      texto: registro.observacoes.texto,
+      data: dataHoje
+    },
+
+    exerciciosFeitos: {
+      quantidade_exercicio: registro.exerciciosFeitos.quantidade,
+      tipos: registro.exerciciosFeitos.tipos,
+      data: dataHoje
     }
   };
+
+  console.log("Dados sendo enviados:", JSON.stringify(dadosParaEnviar, null, 2));
+
+  try {
+    const response = await fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(dadosParaEnviar),
+    });
+
+    console.log("Status da resposta:", response.status);
+
+    const responseText = await response.text();
+    console.log("Resposta completa:", responseText);
+
+    if (response.ok) {
+      const mensagem = registro.id 
+        ? `Registro Diário de ${registro.usuario.nome} atualizado com sucesso!` 
+        : `Registro Diário de ${registro.usuario.nome} cadastrado com sucesso!`;
+
+      setMensagemSucesso(mensagem);
+
+      setTimeout(() => {
+        setMensagemSucesso("");
+        navigate("/home");
+      }, 3000);
+    } else {
+      let errorMessage = "Erro desconhecido";
+
+      try {
+        const errorData = JSON.parse(responseText);
+        errorMessage = errorData.error || errorData.message || JSON.stringify(errorData);
+      } catch {
+        errorMessage = responseText || "Erro sem mensagem";
+      }
+
+      console.error("Erro detalhado:", errorMessage);
+      alert(`Erro ao ${registro.id ? "atualizar" : "cadastrar"} registro: ${errorMessage}`);
+    }
+  } catch (error) {
+    console.error("Erro de conexão:", error);
+    alert("Erro de conexão com o servidor! Verifique sua conexão e tente novamente.");
+  }
+};
 
   return (
     <div className={`min-h-screen flex flex-col items-center justify-center px-6 py-12 transition-colors duration-300 ${
